@@ -2,28 +2,27 @@
 
 This directory (`src`) contains all the source code for the PURE EVIL BGR STORE application.
 
-## Project Structure
+## Project Structure & Architecture
 
-The `src` folder is organized into the following directories:
+The `src` folder is organized following a modular, feature-based architecture combined with atomic design principles for UI.
 
-- **`/app`**: This is where the main application logic resides, following the Next.js App Router structure. It includes:
-  - **`/api`**: For all your API route handlers.
-  - **`layout.tsx`**: The root layout for the application.
-  - **`page.tsx`**: The main page of the application.
-  - **`globals.css`**: Global styles for the application.
+- **`/app`**: Next.js App Router root. Contains all the application pages, layouts, and API routes.
+  - **`/api`**: For all API route handlers.
+  - **`(routes)`**: Grouped routes for authentication, dashboard, etc.
 
-- **`/components`**: This folder is for storing reusable UI components that can be used across the application. Examples include buttons, modals, and cards.
+- **`/features`**: The core of the business logic. Instead of grouping by file type (e.g., all hooks together), code is grouped by feature (e.g., `auth`, `products`). Each feature module is self-contained and may include:
+  - **`/components`**: UI components specific to this feature (e.g., `LoginForm`).
+  - **`/hooks`**: Custom hooks specific to this feature (e.g., `useLoginForm`).
+  - **`/views`**: Page-level components that compose smaller components (e.g., `LoginView`).
+  - **`/services`**: API calls and business logic for the feature.
 
-- **`/features`**: This directory contains the implementation of specific application features. Each feature can have its own set of components, hooks, and services.
+- **`/shared`**: Foundational code that is shared across multiple features or the entire application.
+  - **`/ui`**: Atomic, highly reusable UI components (e.g., `Input`, `Button`, `Sigil`). These should be "dumb" components with no business logic.
+  - **`/types`**: Global TypeScript types and interfaces.
+  - **`/utils`**: General utility functions.
 
-- **`/hooks`**: Custom React hooks are stored here. These hooks can encapsulate and reuse stateful logic.
+- **`/components`**: Composite UI components that are used globally but are constructed from multiple atomic `shared/ui` elements (e.g., complex modals, global navigation headers, application layout wrappers).
 
-- **`/lib`**: This directory is for utility functions, helper scripts, and external library configurations.
+- **`/lib`**: Configuration for external libraries (e.g., Prisma client, Supabase client, formatting tools).
 
-- **`/middleware`**: This folder is for Next.js middleware, which allows you to run code before a request is completed.
-
-- **`/shared`**: This directory contains code that is shared across different parts of the application. It is further divided into:
-  - **`/types`**: For shared TypeScript types and interfaces.
-  - **`/ui`**: For basic UI elements that are shared across multiple components.
-
-- **`/styles`**: This folder is for storing global and component-specific styles. You can have global stylesheets or CSS modules here.
+- **`/styles`**: Global CSS files and Tailwind configurations.

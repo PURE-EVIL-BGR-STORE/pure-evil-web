@@ -1,8 +1,114 @@
 @import "tailwindcss";
+@import "../features/auth/login/styles/login.css";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Light Theme (Default) */
+  --background: #fdfdfd;
+  --foreground: #111111;
+
+  --bg-primary: #fdfdfd;
+  --bg-secondary: #f4f4f4;
+  --surface: #ebebeb;
+
+  --text-primary: #111111;
+  --text-secondary: #555555;
+  --text-muted: #888888;
+
+  --border-soft: #e1e1e1;
+
+  /* Branding Color */
+  --brand-red: #c80000;
+  --brand-red-dark: #800000;
+  --brand-red-bright: #ff1a1a;
+
+  --accent: var(--brand-red);
+  --accent-hover: var(--brand-red-bright);
+  --accent-shadow: rgba(200, 0, 0, 0.1);
+
+  --danger: #c80000;
+  --danger-soft: #ff1a1a;
+}
+
+/* Dark mode by preference */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #050505;
+    --foreground: #f5f5f5;
+
+    --bg-primary: #050505;
+    --bg-secondary: #0c0c0c;
+    --surface: #121212;
+
+    --text-primary: #f5f5f5;
+    --text-secondary: #9e9e9e;
+    --text-muted: #525252;
+
+    --border-soft: #1f1f1f;
+
+    --brand-red: #d30000;
+    --brand-red-dark: #660000;
+    --brand-red-bright: #ff1a1a;
+
+    --accent: var(--brand-red);
+    --accent-hover: var(--brand-red-bright);
+    --accent-shadow: rgba(211, 0, 0, 0.35);
+
+    --danger: #d30000;
+    --danger-soft: #ff1a1a;
+  }
+}
+
+/* Explicit class-based control */
+html.dark {
+  --background: #050505;
+  --foreground: #f5f5f5;
+
+  --bg-primary: #050505;
+  --bg-secondary: #0c0c0c;
+  --surface: #121212;
+
+  --text-primary: #f5f5f5;
+  --text-secondary: #9e9e9e;
+  --text-muted: #525252;
+
+  --border-soft: #1f1f1f;
+
+  --brand-red: #d30000;
+  --brand-red-dark: #660000;
+  --brand-red-bright: #ff1a1a;
+
+  --accent: var(--brand-red);
+  --accent-hover: var(--brand-red-bright);
+  --accent-shadow: rgba(211, 0, 0, 0.35);
+
+  --danger: #d30000;
+  --danger-soft: #ff1a1a;
+}
+
+html.light {
+  --background: #fdfdfd;
+  --foreground: #111111;
+
+  --bg-primary: #fdfdfd;
+  --bg-secondary: #f4f4f4;
+  --surface: #ebebeb;
+
+  --text-primary: #111111;
+  --text-secondary: #555555;
+  --text-muted: #888888;
+
+  --border-soft: #e1e1e1;
+
+  --brand-red: #c80000;
+  --brand-red-dark: #800000;
+  --brand-red-bright: #ff1a1a;
+
+  --accent: var(--brand-red);
+  --accent-hover: var(--brand-red-bright);
+  --accent-shadow: rgba(200, 0, 0, 0.1);
+
+  --danger: #c80000;
+  --danger-soft: #ff1a1a;
 }
 
 @theme inline {
@@ -10,17 +116,98 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-surface: var(--surface);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  --color-border-soft: var(--border-soft);
+
+  --color-brand-red: var(--brand-red);
+  --color-brand-red-dark: var(--brand-red-dark);
+  --color-brand-red-bright: var(--brand-red-bright);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-shadow: var(--accent-shadow);
+
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Global Selection Style */
+::selection {
+  background-color: var(--brand-red);
+  color: #ffffff;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-soft);
+  border-radius: 0px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-red);
+}
+
+/* Autofill styling overrides to fit the gothic theme */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--text-primary) !important;
+  -webkit-box-shadow: 0 0 0px 1000px var(--bg-primary) inset !important;
+  box-shadow: 0 0 0px 1000px var(--bg-primary) inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Base Headings & Text Styling */
+h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+p {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
 }
