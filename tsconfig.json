@@ -18,8 +18,9 @@
         "name": "next"
       }
     ],
+    // Root Path aliases
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": [

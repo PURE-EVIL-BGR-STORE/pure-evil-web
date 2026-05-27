@@ -1,426 +1,142 @@
-# PURE EVIL — UI/UX DESIGN SYSTEM
-## AI AGENT DESIGN PATTERN DOCUMENT
+# PURE EVIL — DESIGN SYSTEM SPECIFICATIONS
+## AI AGENT & FIGMA DESIGN PATTERN REFERENCE
 
-> Design Language:
-> Neo Sigil Brutalism / Dark Celestial Sigilism
-
----
-
-# 1. CORE BRAND FEELING
-
-The UI must feel:
-
-- cold
-- elite
-- mysterious
-- oppressive
-- luxurious
-- dangerous
-- futuristic
-- minimal but dominant
-
-This is NOT cyberpunk.
-This is NOT colorful gaming UI.
-This is NOT soft neumorphism.
-
-The interface should feel like:
-- forbidden technology
-- underground luxury brand
-- cult organization dashboard
-- premium dark fashion brand
-- anime antagonist energy
+This document serves as the absolute styling reference for the **PURE EVIL** project. It specifies all CSS tokens, spacing values, typography specs, color codes, component behaviors, and Figma alignment parameters. Every developer agent or designer must strictly adhere to these values to maintain a unified brand feeling.
 
 ---
 
-# 2. VISUAL REFERENCES
+## 1. BRAND VISUAL ESSENCE (CRIMSON & OBSIDIAN)
+The interface represents **Neo-Sigil Brutalism / Dark Gothic Accent**. It must evoke a feeling of cold luxury, power, tension, and mysterious elite presence. 
 
-Primary inspirations:
-- Berserk (Griffith / Eclipse aesthetic)
-- Evangelion UI typography
-- Dark sigil tattoos
-- Gothic cathedral geometry
-- Brutalist fashion websites
-- Rick Owens aesthetic
-- Balenciaga dark campaigns
-- Arcane / dystopian interfaces
-- FromSoftware menus
-- Death Note minimal tension
+- **Primary Motif**: Blood red accentuating deep obsidian surfaces.
+- **Accents**: Fine gothic geometric lines, subtle text/box shadows simulating soft red mist.
+- **Rules**: Zero rounding (or micro-rounding of maximum 2px), absolute alignment, generous screen-space intervals, and responsive contrast.
 
 ---
 
-# 3. DESIGN PRINCIPLES
+## 2. COLOR PALETTE SYSTEM (RED & BLACK)
 
-## 3.1 Minimal Surface Noise
+The system supports a dual-theme configuration (Dark by default, Light available for adaptability). Theme switching is controlled via standard system media queries or explicit `html.dark` / `html.light` classes.
 
-Avoid:
-- unnecessary gradients
-- playful illustrations
-- colorful icons
-- random shadows
-- excessive borders
+### 2.1 Theme Swatch Mapping
 
-Use:
-- empty space
-- tension
-- contrast
-- large typography
-- sharp alignment
+| Token Name | CSS Variable | Light Theme Hex | Dark Theme Hex | Purpose |
+| :--- | :--- | :--- | :--- | :--- |
+| **Obsidian Main** | `--background` / `--bg-primary` | `#FCFCFC` | `#050505` | Canvas background |
+| **Obsidian Soft** | `--bg-secondary` | `#F4F4F4` | `#0C0C0C` | Component/Card surfaces |
+| **Gothic Surface** | `--surface` | `#EBEBEB` | `#121212` | Hovered surfaces, dropdown wells |
+| **Silver / Charcoal**| `--foreground` / `--text-primary` | `#111111` | `#F5F5F5` | Primary text and major icons |
+| **Ash / Grey** | `--text-secondary` | `#555555` | `#9E9E9E` | Secondary/description text |
+| **Faded Grey** | `--text-muted` | `#888888` | `#525252` | Labels, helper texts, placeholders |
+| **Gothic Line** | `--border-soft` | `#E1E1E1` | `#1F1F1F` | Default borders, subtle separators |
+| **Blood Red Main** | `--brand-red` / `--accent` | `#C80000` | `#D30000` | Active states, primary borders, accents |
+| **Blood Red Dark** | `--brand-red-dark` | `#800000` | `#660000` | Shadows, glowing shadows, depth |
+| **Blood Red Bright**| `--brand-red-bright` / `--accent-hover`| `#FF1A1A` | `#FF1A1A` | Focused borders, active state hovers |
 
----
-
-## 3.2 Strong Visual Hierarchy
-
-The UI should always guide attention through:
-1. Symbol / Logo
-2. Headline
-3. Main CTA
-4. Product Visual
-5. Secondary Details
-
----
-
-## 3.3 Luxury Darkness
-
-Black is NOT enough.
-
-Use:
-- deep charcoal
-- graphite
-- gunmetal
-- muted silver
-- dark crimson accents
-- icy blue highlights
-
-Avoid:
-- pure white backgrounds
-- saturated colors
-- neon overload
+### 2.2 Aesthetic Shadows & Effects
+- **Gothic Text Glow**:
+  ```css
+  text-shadow: 0 2px 8px var(--brand-red-dark);
+  ```
+- **Obsidian Box Glow (Active Card/Input)**:
+  ```css
+  box-shadow: 0 0 12px var(--accent-shadow); /* accent-shadow is rgba of brand-red-dark */
+  ```
 
 ---
 
-# 4. COLOR SYSTEM
+## 3. TYPOGRAPHY SYSTEM
 
-## Primary Colors
+We use Next.js default **Geist Sans** (fallback to standard grotesque fonts: Inter, Space Grotesk, or Arial). All headings are set to **uppercase** to project a dominant, architectural atmosphere.
 
+### 3.1 Typography Scale Reference Table
+
+| Level | Size (rem) | Size (px) | Line Height | Letter Spacing | Font Weight | Notes / Purpose |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **H1 (Display)** | `3.5rem` (Desktop)<br>`2.5rem` (Mobile) | 56px<br>40px | `1.1` | `0.25em` (25%) | `800` (Extra Bold) | Brand logo alternatives, hero headers |
+| **H2 (Title)** | `2.0rem` (Desktop)<br>`1.5rem` (Mobile) | 32px<br>24px | `1.2` | `0.2em` (20%) | `700` (Bold) | Main page titles, card headers |
+| **H3 (Subtitle)**| `1.25rem` (Desktop)<br>`1.125rem` (Mobile)| 20px<br>18px | `1.3` | `0.15em` (15%) | `600` (Semi-Bold) | Section headers, panel titles |
+| **H4 (Section)** | `1.0rem` | 16px | `1.4` | `0.12em` (12%) | `600` (Semi-Bold) | Component sub-headers |
+| **H5 (Label)** | `0.875rem` | 14px | `1.4` | `0.1em` (10%) | `500` (Medium) | Small headings, button labels |
+| **H6 (Metadata)**| `0.75rem` | 12px | `1.5` | `0.08em` (8%) | `500` (Medium) | Small metadata, helper text |
+| **Body (Large)** | `1.125rem` | 18px | `1.6` | `0.02em` (2%) | `400` (Regular) | Intro paragraphs |
+| **Body (Normal)**| `0.875rem` | 14px | `1.6` | `0.02em` (2%) | `400` (Regular) | General paragraph texts |
+| **Small text** | `0.75rem` | 12px | `1.5` | `0.05em` (5%) | `400` (Regular) | Errors, validation alerts |
+| **Micro text** | `0.625rem` | 10px | `1.4` | `0.2em` (20%) | `300` (Light) | Sigil subtitles, absolute tiny overlays |
+
+---
+
+## 4. SPACING & LAYOUT SYSTEM
+
+Spacing uses a strict vertical grid system with pixel mappings. Spacing values must match Tailwind sizes or direct rem configurations.
+
+| Token | Rem Value | Pixel Value | Typical Application |
+| :--- | :--- | :--- | :--- |
+| **`xxs`** | `0.25rem` | 4px | Inline icon-to-text spacing, micro gaps |
+| **`xs`** | `0.5rem` | 8px | Label-to-input gap, inline element list margin |
+| **`sm`** | `0.75rem` | 12px | Underline decorative sizes, metadata gaps |
+| **`md`** | `1.0rem` | 16px | Padding inside small tables, row gap |
+| **`lg`** | `1.5rem` | 24px | Gap between form groups, default cell padding |
+| **`xl`** | `2.0rem` | 32px | Default padding inside auth cards, card gap |
+| **`2xl`** | `3rem` | 48px | Margin between headers and forms |
+| **`3xl`** | `4rem` | 64px | Top and bottom block padding |
+| **`4xl`** | `6rem` | 96px | Hero page vertical empty space, separation |
+| **`5xl`** | `8rem` | 128px | Extreme gothic minimalist layout offsets |
+
+---
+
+## 5. INTERACTIVE & INPUT COMPONENT SPECIFICATIONS
+
+### 5.1 Redesigned Input UI Style
+Inputs must not look like standard, cheap line inputs. They should be presented as **recessed obsidian boxes** with immediate tactile states.
+
+- **Structure**: Box border layout.
+- **Corners**: `0px` border-radius (sharp corners).
+- **Background**: `rgba(5, 5, 5, 0.4)` (transparent background blending over card blur).
+- **Default Border**: `1px solid var(--border-soft)`.
+- **Hover State**: Border shifts to `1px solid rgba(211, 0, 0, 0.5)` (semi-transparent brand red).
+- **Focus State**:
+  - Border transitions to `1px solid var(--brand-red-bright)` (`#FF1A1A`).
+  - Outer glow: `box-shadow: 0 0 10px rgba(211, 0, 0, 0.15)`.
+- **Label Color Change**: The label text shifts to `var(--brand-red)` on focus of the sibling input. Set up parent `group` class on form controls to enable `group-focus-within:text-brand-red`.
+- **Error State**: Border shifts to `1px solid var(--danger)` with text description in `var(--danger-soft)`.
+
+### 5.2 Autofill Glitch Prevention (CSS)
+Browsers inject default background colors (`#E8F0FE` / white) and black text when auto-filling fields. To preserve the dark UI:
 ```css
---bg-primary: #050505;
---bg-secondary: #0D0D0D;
---surface: #121212;
---surface-soft: #1A1A1A;
-
---text-primary: #F5F5F5;
---text-secondary: #9A9A9A;
-
---accent: #8BA6FF;
---accent-dark: #4D5B89;
-
---danger: #6A0F1A;
---silver: #BFC7D5;
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: var(--text-primary) !important;
+  -webkit-box-shadow: 0 0 0px 1000px var(--bg-primary) inset !important;
+  box-shadow: 0 0 0px 1000px var(--bg-primary) inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
 ```
 
----
-
-# 5. TYPOGRAPHY SYSTEM
-
-## Headlines
-
-Style:
-- uppercase
-- large spacing
-- sharp clean fonts
-- brutal luxury
-
-Recommended Fonts:
-- Space Grotesk
-- Satoshi
-- General Sans
-- Neue Montreal
-- Geist
-- Bebas Neue (display only)
+### 5.3 Button Specifications
+- **Primary Button**:
+  - Background: `var(--text-primary)` (pure light text color/white/silver)
+  - Color: `var(--bg-primary)` (pure dark obsidian/black)
+  - Hover background: `transparent`, hover text: `var(--brand-red-bright)`, hover border: `var(--brand-red-bright)`
+  - Transition duration: `500ms` with `cubic-bezier(0.22, 1, 0.36, 1)`.
+- **Secondary Button**:
+  - Background: `transparent`, Border: `1px solid var(--border-soft)`
+  - Color: `var(--text-secondary)`
+  - Hover background: `var(--surface)`, Hover border: `var(--brand-red)`
 
 ---
 
-## Typography Rules
-
-### Headlines
-- font-weight: 700–900
-- letter-spacing: 0.1em
-- uppercase preferred
-
-### Body Text
-- muted
-- clean
-- readable
-- never playful
-
----
-
-# 6. LAYOUT SYSTEM
-
-## Layout Philosophy
-
-Use:
-- asymmetrical balance
-- large empty spaces
-- oversized hero sections
-- centered sigils/logos
-- cinematic spacing
-
-Avoid:
-- crowded dashboards
-- too many cards
-- boxed layouts everywhere
-
----
-
-## Grid
-
-Preferred:
-- 12-column grid
-- large gutters
-- spacing consistency
-
-Spacing scale:
-```txt
-4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 96 / 128
-```
-
----
-
-# 7. COMPONENT DESIGN RULES
-
-## Buttons
-
-### Primary Button
-
-Style:
-- dark
-- sharp
-- minimal
-- high contrast
-
-Properties:
-```css
-background: #F5F5F5;
-color: #050505;
-border-radius: 2px;
-padding: 14px 24px;
-font-weight: 700;
-letter-spacing: 0.08em;
-text-transform: uppercase;
-```
-
-Hover:
-- slight opacity shift
-- subtle glow
-- slow transition
-
----
-
-## Secondary Button
-
-```css
-background: transparent;
-border: 1px solid #2A2A2A;
-color: #F5F5F5;
-```
-
----
-
-# 8. CARD DESIGN
-
-Cards should feel:
-- tactical
-- premium
-- clean
-
-Use:
-- soft borders
-- subtle contrast
-- minimal blur
-- dark surfaces
-
-Avoid:
-- heavy shadows
-- bright outlines
-- colorful gradients
-
----
-
-# 9. ICONOGRAPHY
-
-Icons must be:
-- thin
-- geometric
-- sharp
-- minimal
-
-Use:
-- Lucide
-- custom sigils
-- monochrome icons
-
-Avoid:
-- cartoon icons
-- emoji style
-- colorful SVG packs
-
----
-
-# 10. ANIMATION SYSTEM
-
-Animations should feel:
-- slow
-- cinematic
-- intentional
-- smooth
-
-Avoid:
-- bouncy effects
-- playful easing
-- fast movement
-
-Preferred easing:
-```css
-cubic-bezier(0.22, 1, 0.36, 1)
-```
-
-Preferred duration:
-```css
-200ms – 600ms
-```
-
----
-
-# 11. UI EFFECTS
-
-Allowed:
-- grain/noise texture
-- subtle blur
-- glass overlays
-- ambient glow
-- eclipse halos
-- thin lines
-- sigil overlays
-
-Avoid:
-- rainbow glow
-- RGB gamer effect
-- overexposed bloom
-
----
-
-# 12. PRODUCT PAGE STYLE
-
-Products should feel:
-- rare
-- collectible
-- elite
-
-Use:
-- oversized imagery
-- cinematic crop
-- monochrome environments
-- fashion editorial layout
-
----
-
-# 13. APP ICON DESIGN
-
-Rules:
-- recognizable at 24x24
-- one symbol only
-- high silhouette clarity
-- minimal internal detail
-
-Best choices:
-- stylized "P"
-- eclipse eye
-- sigil emblem
-- mirrored rune
-
----
-
-# 14. BRAND WORDS
-
-Allowed Vocabulary:
-- ascend
-- eclipse
-- void
-- pure
-- cult
-- fallen
-- divine
-- abyss
-- halo
-- omen
-- sigil
-- throne
-
-Avoid:
-- cute
-- fun
-- colorful
-- happy
-- casual
-
----
-
-# 15. UI GENERATION PROMPT TEMPLATE
-
-## For AI UI Generation
-
-```txt
-Create a dark luxury brutalist UI inspired by Berserk, gothic sigilism, and futuristic fashion brands.
-
-Style:
-- cinematic
-- minimal
-- elite
-- mysterious
-- sharp geometry
-- dark monochrome palette
-- silver accents
-- subtle glow
-- oversized typography
-- asymmetrical layout
-- premium streetwear aesthetic
-
-Avoid:
-- colorful UI
-- playful components
-- cartoon aesthetics
-- excessive gradients
-- generic SaaS layouts
-
-Use:
-- dark backgrounds
-- elegant spacing
-- fashion editorial composition
-- sharp buttons
-- atmospheric visuals
-- minimalist icons
-```
-
----
-
-# 16. FRONTEND STACK RECOMMENDATION
-
-Recommended:
-- Next.js 15
-- TailwindCSS
-- Framer Motion
-- shadcn/ui
-- Lenis smooth scroll
-- GSAP (hero animations only)
-
----
-
-# 17. FINAL DESIGN GOAL
-
-The interface should make users feel:
-
-> "This brand looks dangerous, expensive, and unforgettable."
-
-NOT:
-> "This looks like another generic anime clothing store."
+## 6. FIGMA IMPORT / DESIGN TRANSLATION GUIDE
+
+For designers translating this code-first layout into Figma components:
+
+1. **Grids**: Use a 12-column desktop grid with a `32px` margin and `24px` gutter. Centered login layouts must use a fixed `448px` width (28rem) card.
+2. **Text Styles**:
+   - `h1`: 56pt, Bold, Tracking +25%.
+   - `h2`: 32pt, Bold, Tracking +20%.
+   - `h3`: 20pt, Semi-Bold, Tracking +15%.
+   - `p (body)`: 14pt, Regular, Auto height, Tracking +2%.
+3. **Corner Radius**: Set all button, input, and card corner roundings to `0` or `2` pixels max.
+4. **Color Styles**: Create Figma color styles mapped exactly to the CSS variables in Section 2.1.
