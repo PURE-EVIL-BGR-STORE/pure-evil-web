@@ -14,12 +14,10 @@ interface Product {
 }
 
 const products: Product[] = [
-  { id: 1, name: "VOID OVERSIZED TEE", category: "APPAREL", price: "$85", image: "/products/void-tee.jpg", isLarge: true },
-  { id: 2, name: "SIGIL COMPRESSION", category: "GYMWEAR", price: "$120", image: "/products/sigil-compression.jpg" },
-  { id: 3, name: "RITUAL HOODIE", category: "APPAREL", price: "$180", image: "/products/ritual-hoodie.jpg" },
-  { id: 4, name: "ECLIPSE CHAIN", category: "JEWELRY", price: "$95", image: "/products/eclipse-chain.jpg" },
-  { id: 5, name: "CONTROLLED INSANITY TEE", category: "APPAREL", price: "$85", image: "/products/ci-tee.jpg", isLarge: true },
-  { id: 6, name: "BERSERK TANK", category: "GYMWEAR", price: "$65", image: "/products/berserk-tank.jpg" },
+  { id: 1, name: "VOID HOODIE", category: "APPAREL", price: "$180", image: "/images/products/void-hoodie.png", isLarge: true },
+  { id: 2, name: "SIGIL COMPRESSION", category: "GYMWEAR", price: "$120", image: "/images/products/sigil-compression.png" },
+  { id: 3, name: "BERSERK TANK", category: "GYMWEAR", price: "$65", image: "/images/products/berserk-tank.png" },
+  { id: 4, name: "CONTROLLED INSANITY TEE", category: "APPAREL", price: "$85", image: "/images/products/controlled-insanity-tee.png", isLarge: true },
 ];
 
 function ProductCard({ product, index }: { product: Product; index: number }) {
@@ -38,14 +36,14 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="relative aspect-[3/4] bg-[#111111] overflow-hidden">
-        {/* Product Image Placeholder */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center">
-            <div className="w-24 h-24 mx-auto mb-4 border border-[#7A7A7A]/20 flex items-center justify-center">
-              <span className="font-serif text-4xl text-[#7A7A7A]/30">{product.id}</span>
-            </div>
-          </div>
-        </div>
+        {/* Product Image */}
+        <Image
+          src={product.image}
+          alt={product.name}
+          fill
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        />
 
         {/* Hover Overlay */}
         <motion.div

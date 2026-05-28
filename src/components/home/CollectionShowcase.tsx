@@ -2,19 +2,21 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
+import Image from "next/image";
 
 interface Collection {
   id: number;
   name: string;
   tagline: string;
+  image: string;
 }
 
 const collections: Collection[] = [
-  { id: 1, name: "VOID", tagline: "Embrace the emptiness" },
-  { id: 2, name: "ASCENSION", tagline: "Rise beyond mortality" },
-  { id: 3, name: "RITUAL", tagline: "Sacred darkness" },
-  { id: 4, name: "CONTROLLED INSANITY", tagline: "Order in chaos" },
-  { id: 5, name: "SIGIL CORE", tagline: "Mark of the devoted" },
+  { id: 1, name: "VOID", tagline: "Embrace the emptiness", image: "/images/collections/void.png" },
+  { id: 2, name: "ASCENSION", tagline: "Rise beyond mortality", image: "/images/collections/ascension.png" },
+  { id: 3, name: "RITUAL", tagline: "Sacred darkness", image: "/images/collections/ritual.png" },
+  { id: 4, name: "CONTROLLED INSANITY", tagline: "Order in chaos", image: "/images/collections/controlled-insanity.png" },
+  { id: 5, name: "ECLIPSE", tagline: "Mark of the devoted", image: "/images/collections/eclipse.png" },
 ];
 
 export function CollectionShowcase() {
@@ -65,12 +67,14 @@ export function CollectionShowcase() {
               onMouseEnter={() => setActiveIndex(index)}
             >
               <div className="relative aspect-[16/10] md:aspect-[16/9] bg-[#111111] overflow-hidden group cursor-pointer">
-                {/* Placeholder Background */}
-                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#111111] to-[#0a0a0a]">
-                  <span className="font-serif text-6xl md:text-8xl lg:text-9xl text-[#7A7A7A]/10 tracking-[0.3em]">
-                    {String(collection.id).padStart(2, "0")}
-                  </span>
-                </div>
+                {/* Collection Image */}
+                <Image
+                  src={collection.image}
+                  alt={collection.name}
+                  fill
+                  className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  sizes="(max-width: 768px) 85vw, (max-width: 1024px) 50vw, 60vw"
+                />
 
                 {/* Overlay on Hover */}
                 <motion.div
