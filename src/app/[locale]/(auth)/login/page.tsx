@@ -1,7 +1,16 @@
-// This is the login page for the application, located at /login. It imports and renders the LoginView component from the auth feature.
-import { LoginView } from "@/features/auth/login/views/login-view";
+import type { Metadata } from "next";
+import { Atmosphere } from "@/features/home";
+import { LoginView } from "@/features/auth/login/LoginView";
 
-// This is the login page component that renders the LoginView.
+export const metadata: Metadata = {
+  title: "Sign In — PURE EVIL",
+};
+
 export default function LoginPage() {
-  return <LoginView />;
+  return (
+    <>
+      <Atmosphere />
+      <LoginView />
+    </>
+  );
 }
