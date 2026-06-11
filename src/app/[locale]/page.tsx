@@ -1,21 +1,33 @@
 import {
-  HeroSection,
-  FeaturedProducts,
-  BrandPhilosophy,
-  CollectionShowcase,
-  SocialSection,
-  Footer,
-} from "@/components/home";
+  Atmosphere,
+  RevealController,
+  SiteNav,
+  Hero,
+  Ticker,
+  Manifesto,
+  Collections,
+  FeaturedDrop,
+  Lookbook,
+  Cult,
+  SiteFooter,
+} from "@/features/home";
 
 export default function Home() {
   return (
-    <main className="flex flex-col min-h-screen bg-background">
-      <HeroSection />
-      <FeaturedProducts />
-      <BrandPhilosophy />
-      <CollectionShowcase />
-      <SocialSection />
-      <Footer />
-    </main>
+    <>
+      <Atmosphere />
+      <RevealController />
+      <SiteNav />
+      <main>
+        <Hero />
+        <Ticker />
+        <Manifesto />
+        <Collections />
+        <FeaturedDrop />
+        <Lookbook />
+        <Cult />
+      </main>
+      <SiteFooter />
+    </>
   );
 }
