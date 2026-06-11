@@ -33,3 +33,7 @@ Whenever you are given a task:
 4. **Refactor carefully:** If you modify a shared file, ensure it does not break backward compatibility.
 
 *Failure to comply with these guidelines will result in spaghetti code, styling inconsistencies, and architectural degradation. Act like a Senior.*
+
+## Commit History
+- `(feat): Implement new navigation bar, homepage design (#6, #7)`
+- `(refactor): Refactor register/login screen (#5)`

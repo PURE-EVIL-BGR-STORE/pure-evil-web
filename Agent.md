@@ -37,3 +37,7 @@ When asked to build a new feature:
 3. Wait for alignment if the architecture seems ambiguous.
 
 **Violation of these rules, especially creating duplicate UI components or utilities, is considered a failure to maintain the project's standards.**
+
+## Commit History
+- `(feat): Implement new navigation bar, homepage design (#6, #7)`
+- `(refactor): Refactor register/login screen (#5)`
