@@ -4,7 +4,7 @@ This directory (`src`) contains all the source code for the PURE EVIL BGR STORE 
 
 ## Project Structure & Architecture
 
-The `src` folder is organized following a modular, feature-based architecture combined with atomic design principles for UI.
+The `src` folder is organized following a modular, **feature-based architecture** (Feature-Sliced Design) combined with atomic design principles for UI.
 
 - **`/app`**: Next.js App Router root. Contains all the application pages, layouts, and API routes.
   - **`/api`**: For all API route handlers.
