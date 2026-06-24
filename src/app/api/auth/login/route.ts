@@ -30,12 +30,22 @@ export async function POST(req: Request) {
       }
     );
 
-    const tokenData = await tokenResponse.json();
+    const responseText = await tokenResponse.text();
+    let tokenData: any;
+    try {
+      tokenData = JSON.parse(responseText);
+    } catch (e: any) {
+      console.error("Keycloak raw response:", responseText);
+      return NextResponse.json(
+        { error: "Keycloak returned non-JSON response", raw: responseText },
+        { status: 502 }
+      );
+    }
 
     if (!tokenResponse.ok) {
       return NextResponse.json(
         { error: tokenData.error_description ?? "Invalid credentials" },
-        { status: 401 }
+        { status: tokenResponse.status || 401 }
       );
     }
 
@@ -52,8 +62,8 @@ export async function POST(req: Request) {
     });
 
     return res;
-  } catch (error) {
+  } catch (error: any) {
     console.error("Login Error:", error);
-    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+    return NextResponse.json({ error: error?.message ?? "Internal server error", stack: error?.stack }, { status: 500 });
   }
 }

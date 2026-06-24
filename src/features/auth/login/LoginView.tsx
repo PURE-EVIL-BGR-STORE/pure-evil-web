@@ -5,6 +5,8 @@ import { Link } from "@/i18n/routing";
 import { AuthBrandPanel } from "../components/AuthBrandPanel";
 import { EyeIcon } from "../components/EyeIcon";
 import { GoogleIcon } from "../components/GoogleIcon";
+import { authService } from "../services/auth.service";
+import { toast } from "sonner";
 
 export function LoginView() {
   const [identifier, setIdentifier] = useState("");
@@ -26,12 +28,21 @@ export function LoginView() {
     return Object.keys(next).length === 0;
   };
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
     setSubmitting(true);
-    // TODO: wire to authService.login({ identifier, password })
-    setTimeout(() => setSubmitting(false), 1800);
+    try {
+      await authService.login({ identifier, password });
+      toast.success("Welcome back!");
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 800);
+    } catch (err: any) {
+      console.error("Login Error:", err);
+      toast.error(err?.response?.data?.error || err?.message || "Invalid credentials.");
+      setSubmitting(false);
+    }
   };
 
   return (

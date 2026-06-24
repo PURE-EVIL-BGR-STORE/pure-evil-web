@@ -4,17 +4,17 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    const profileServiceUrl = process.env.PROFILE_SERVICE_URL;
+    const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8080";
     const keycloakUrl = process.env.KEYCLOAK_URL;
     const realm = process.env.KEYCLOAK_REALM;
     const clientId = process.env.KEYCLOAK_CLIENT_ID;
     const clientSecret = process.env.KEYCLOAK_CLIENT_SECRET;
 
-    if (!profileServiceUrl || !keycloakUrl || !realm || !clientId || !clientSecret) {
+    if (!keycloakUrl || !realm || !clientId || !clientSecret) {
       return NextResponse.json({ error: "Auth service not configured" }, { status: 503 });
     }
 
-    const response = await fetch(`${profileServiceUrl}/profile/register`, {
+    const response = await fetch(`${apiUrl}/api/v1/profiles/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),

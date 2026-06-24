@@ -5,9 +5,9 @@ import type { LoginCredentials, RegisterCredentials, AuthResponse } from "@/shar
 export const authService = {
   // login api
   login: (credentials: LoginCredentials) =>
-    apiClient.post<AuthResponse>("/api/auth/login", credentials),
+    apiClient.post<AuthResponse>("/api/auth/login", credentials, { baseURL: "" }),
 
   // register api
   register: (credentials: RegisterCredentials) =>
-    apiClient.post<AuthResponse>("/api/auth/register", credentials),
+    apiClient.post<AuthResponse>("/api/auth/register", credentials, { baseURL: "" }),
 };

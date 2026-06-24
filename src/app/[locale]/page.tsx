@@ -22,7 +22,6 @@ export default function Home() {
         <Hero />
         <Ticker />
         <Manifesto />
-        <Collections />
         <FeaturedDrop />
         <Lookbook />
         <Cult />
