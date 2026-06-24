@@ -6,12 +6,7 @@ services:
     container_name: pure-evil-web
     ports:
       - "3001:3000"
-    environment:
-      PROFILE_SERVICE_URL: http://host.docker.internal:9001
-      KEYCLOAK_URL: http://host.docker.internal:8180
-      KEYCLOAK_REALM: pureevilstore
-      KEYCLOAK_CLIENT_ID: pureevilstore
-      KEYCLOAK_CLIENT_SECRET: hhByL1xDjmL9kwypUIM26SHJjLXllTHt
-      NEXT_PUBLIC_API_BASE_URL: http://localhost:8080
+    env_file:
+      - .env
     extra_hosts:
       - "host.docker.internal:host-gateway"
