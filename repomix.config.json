@@ -1,0 +1,15 @@
+{
+  "$schema": "https://repomix.com/schemas/latest/schema.json",
+  "output": {
+    "filePath": "repomix-output.md",
+    "style": "markdown"
+  },
+  "ignore": {
+    "customPatterns": [
+      "**/.env*",
+      "**/package-lock.json",
+      "**/pnpm-lock.yaml",
+      "**/pnpm-workspace.yaml"
+    ]
+  }
+}
