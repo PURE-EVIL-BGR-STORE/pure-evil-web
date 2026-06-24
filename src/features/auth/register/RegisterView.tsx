@@ -4,6 +4,8 @@ import { useMemo, useRef, useState } from "react";
 import { Link } from "@/i18n/routing";
 import { AuthBrandPanel } from "../components/AuthBrandPanel";
 import { EyeIcon } from "../components/EyeIcon";
+import { toast } from "sonner";
+import { authService } from "../services/auth.service";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -57,7 +59,7 @@ export function RegisterView() {
     return Object.keys(next).length === 0;
   };
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const ok = validate();
     if (!ok) {
@@ -71,8 +73,16 @@ export function RegisterView() {
     }
     setTermsError(false);
     setStatus("submitting");
-    // TODO: wire to authService.register({ ...form })
-    setTimeout(() => setStatus("done"), 1600);
+
+    try {
+      await authService.register(form);
+      setStatus("done");
+      toast.success("Profile initiated successfully!");
+    } catch (err: any) {
+      console.error("Register Error:", err);
+      setStatus("idle");
+      toast.error(err?.response?.data?.message || err?.message || "Failed to initiate profile.");
+    }
   };
 
   return (

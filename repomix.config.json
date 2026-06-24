@@ -1,7 +1,7 @@
 {
   "$schema": "https://repomix.com/schemas/latest/schema.json",
   "output": {
-    "filePath": "repomix-output.md",
+    "filePath": "./docs/repomix-output.md",
     "style": "markdown"
   },
   "ignore": {

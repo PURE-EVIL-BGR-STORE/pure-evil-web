@@ -3,12 +3,15 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "";
 
 type RequestOptions = Omit<RequestInit, "body"> & {
   body?: unknown;
+  baseURL?: string;
 };
 
 async function request<T>(path: string, options: RequestOptions = {}): Promise<T> {
-  const { body, headers, ...rest } = options;
+  const { body, headers, baseURL = BASE_URL, ...rest } = options;
 
-  const response = await fetch(`${BASE_URL}${path}`, {
+  const url = path.startsWith("http") ? path : `${baseURL}${path}`;
+
+  const response = await fetch(url, {
     ...rest,
     headers: {
       "Content-Type": "application/json",
