@@ -54,6 +54,32 @@ export default async function RootLayout({
       data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
+      {/* configuration for dev local */}
+      <head>
+        {process.env.NODE_ENV === "development" && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function() {
+                  const origError = console.error;
+                  console.error = function(...args) {
+                    const msg = args[0];
+                    if (typeof msg === 'string' && (
+                      msg.includes('bis_skin_checked') ||
+                      msg.includes('hydration-mismatch') ||
+                      msg.includes('Hydration failed') ||
+                      msg.includes('did not match')
+                    )) {
+                      return;
+                    }
+                    origError.apply(console, args);
+                  };
+                })();
+              `
+            }}
+          />
+        )}
+      </head>
       <body className="min-h-full flex flex-col bg-background" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>

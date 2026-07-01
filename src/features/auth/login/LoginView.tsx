@@ -33,10 +33,15 @@ export function LoginView() {
     if (!validate()) return;
     setSubmitting(true);
     try {
-      await authService.login({ identifier, password });
+      const res = await authService.login({ identifier, password });
       toast.success("Welcome back!");
       setTimeout(() => {
-        window.location.href = "/";
+        if (res.isAuthorized) {
+          const dashboardUrl = process.env.NEXT_PUBLIC_DASHBOARD_URL || "http://localhost:3001/dashboard";
+          window.location.href = dashboardUrl;
+        } else {
+          window.location.href = "/";
+        }
       }, 800);
     } catch (err: any) {
       console.error("Login Error:", err);

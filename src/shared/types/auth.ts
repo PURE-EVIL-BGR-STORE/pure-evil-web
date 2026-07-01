@@ -3,6 +3,7 @@ export interface LoginCredentials {
   password: string;
 }
 
+// Interface định nghĩa response sau khi đăng ký
 export interface RegisterCredentials {
   username: string;
   email: string;
@@ -15,4 +16,5 @@ export interface RegisterCredentials {
 export interface AuthResponse {
   success: boolean;
   data?: unknown;
+  isAuthorized?: boolean;
 }
