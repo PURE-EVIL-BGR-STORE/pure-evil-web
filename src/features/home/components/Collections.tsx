@@ -4,13 +4,42 @@ type Collection = {
   name: string;
   tag: string;
   caption: string;
+  img: string;
 };
 
 const COLLECTIONS: Collection[] = [
-  { idx: "01 / 04", count: "18 Pieces", name: "Void", tag: "Embrace the emptiness", caption: "Void editorial — full-bleed" },
-  { idx: "02 / 04", count: "12 Pieces", name: "Ascension", tag: "Rise beyond mortality", caption: "Ascension editorial — full-bleed" },
-  { idx: "03 / 04", count: "9 Pieces", name: "Ritual", tag: "Sacred darkness", caption: "Ritual editorial — full-bleed" },
-  { idx: "04 / 04", count: "14 Pieces", name: "Eclipse", tag: "Mark of the devoted", caption: "Eclipse editorial — full-bleed" },
+  { 
+    idx: "01 / 04", 
+    count: "18 Pieces", 
+    name: "Void", 
+    tag: "Embrace the emptiness", 
+    caption: "Void editorial — full-bleed",
+    img: "/look_obsidian.png"
+  },
+  { 
+    idx: "02 / 04", 
+    count: "12 Pieces", 
+    name: "Ascension", 
+    tag: "Rise beyond mortality", 
+    caption: "Ascension editorial — full-bleed",
+    img: "/look_ascension.png"
+  },
+  { 
+    idx: "03 / 04", 
+    count: "9 Pieces", 
+    name: "Ritual", 
+    tag: "Sacred darkness", 
+    caption: "Ritual editorial — full-bleed",
+    img: "/look_ritual.png"
+  },
+  { 
+    idx: "04 / 04", 
+    count: "14 Pieces", 
+    name: "Eclipse", 
+    tag: "Mark of the devoted", 
+    caption: "Eclipse editorial — full-bleed",
+    img: "/look_eclipse.png"
+  },
 ];
 
 export function Collections() {
@@ -35,12 +64,12 @@ export function Collections() {
           {COLLECTIONS.map((c, i) => (
             <a className="col-card" href="#" key={c.name} data-reveal data-reveal-delay={i % 2 === 1 ? "1" : undefined}>
               <div className="col-card__media">
-                <div className="ph">
-                  <span className="ph__cap">
-                    {c.caption}
-                    <b>drop image · 1600×1300</b>
-                  </span>
-                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img 
+                  src={c.img} 
+                  alt={c.name} 
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
               </div>
               <div className="col-card__shade"></div>
               <div className="col-card__body">
