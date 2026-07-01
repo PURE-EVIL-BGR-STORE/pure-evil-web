@@ -49,7 +49,18 @@ export async function POST(req: Request) {
       );
     }
 
-    const res = NextResponse.json({ success: true }, { status: 200 });
+    let isAuthorized = false;
+    try {
+      const payloadBase64 = tokenData.access_token.split('.')[1];
+      const payloadJson = Buffer.from(payloadBase64, 'base64').toString('utf-8');
+      const payload = JSON.parse(payloadJson);
+      const roles = payload.realm_access?.roles || [];
+      isAuthorized = roles.includes("ADMIN") || roles.includes("STAFF");
+    } catch (e) {
+      console.error("Failed to parse token roles", e);
+    }
+
+    const res = NextResponse.json({ success: true, isAuthorized }, { status: 200 });
 
     res.cookies.set({
       name: "auth_session",
@@ -60,6 +71,18 @@ export async function POST(req: Request) {
       maxAge: tokenData.expires_in ?? 3600,
       path: "/",
     });
+
+    if (tokenData.refresh_token) {
+      res.cookies.set({
+        name: "auth_refresh",
+        value: tokenData.refresh_token,
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: tokenData.refresh_expires_in ?? 2592000,
+        path: "/",
+      });
+    }
 
     return res;
   } catch (error: any) {

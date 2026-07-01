@@ -67,6 +67,18 @@ export async function POST(req: Request) {
       path: "/",
     });
 
+    if (tokenData.refresh_token) {
+      res.cookies.set({
+        name: "auth_refresh",
+        value: tokenData.refresh_token,
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        maxAge: tokenData.refresh_expires_in ?? 2592000,
+        path: "/",
+      });
+    }
+
     return res;
   } catch (error) {
     console.error("Register Error:", error);

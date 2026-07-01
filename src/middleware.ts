@@ -10,13 +10,11 @@ export default function middleware(request: NextRequest) {
   const requestHeaders = new Headers(request.headers)
   requestHeaders.set('x-pathname', pathname)
 
-  // Define headers property to override the read-only request headers
-  Object.defineProperty(request, 'headers', {
-    value: requestHeaders,
-    writable: false
+  const modifiedRequest = new NextRequest(request, {
+    headers: requestHeaders,
   })
 
-  const response = handleI18nRouting(request)
+  const response = handleI18nRouting(modifiedRequest)
 
   response.headers.set('x-pathname', pathname)
 
