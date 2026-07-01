@@ -1,0 +1,11 @@
+{
+  "Auth": {
+    "loginTitle": "Enter the Archive",
+    "registerTitle": "Initiate Profile",
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign In",
+    "signUp": "Create Access",
+    "back": "Back"
+  }
+}

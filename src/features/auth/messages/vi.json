@@ -1,0 +1,11 @@
+{
+  "Auth": {
+    "loginTitle": "Đăng Nhập Lưu Trữ",
+    "registerTitle": "Khởi Tạo Hồ Sơ",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "signIn": "Đăng Nhập",
+    "signUp": "Khởi Tạo Truy Cập",
+    "back": "Quay lại"
+  }
+}
