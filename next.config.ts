@@ -5,7 +5,10 @@ const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
   /* config options here */
-  output: "standalone"
+  output: "standalone",
+  turbopack: {
+    root: __dirname,
+  }
 };
 
 export default withNextIntl(nextConfig);

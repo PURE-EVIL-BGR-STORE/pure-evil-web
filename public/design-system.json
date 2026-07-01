@@ -1,0 +1,39 @@
+{
+  "name": "Pure Evil Design System",
+  "version": "1.0.0",
+  "theme": "Gothic Luxury / Dark Sigilism",
+  "colors": {
+    "obsidian": {
+      "bg": "#050505",
+      "bg2": "#0a0a0a",
+      "panel": "#0c0c0c",
+      "panel2": "#101010"
+    },
+    "accents": {
+      "red": "#c5141b",
+      "redBright": "#ff1a1a",
+      "redDeep": "#4a0408",
+      "redGlow": "rgba(197, 20, 27, 0.35)"
+    },
+    "text": {
+      "fg": "#f5f3f1",
+      "muted": "#b8b5b2",
+      "faint": "#8c8885",
+      "ghost": "#3e3b39"
+    }
+  },
+  "typography": {
+    "serif": "var(--font-cinzel), Times New Roman, serif",
+    "sans": "var(--font-inter), -apple-system, system-ui, sans-serif",
+    "mono": "var(--font-jetbrains), ui-monospace, monospace"
+  },
+  "assets": {
+    "styleGuide": "/pure-evil-style-guide.png",
+    "logos": {
+      "primary": "/PURE_EVIL_LOGO.png",
+      "darkObsidian": "/PURE_EVIL_LOGO_2.png",
+      "texturedMetal": "/PURE_EVIL_LOGO_3.png",
+      "goldMetallic": "/PURE_EVIL_LOGO_4.png"
+    }
+  }
+}

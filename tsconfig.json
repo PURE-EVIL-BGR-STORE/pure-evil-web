@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -18,9 +22,193 @@
         "name": "next"
       }
     ],
-    // Root Path aliases
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@/components/ui/accordion": [
+        "./src/components/ui/accordion/accordion"
+      ],
+      "@/components/ui/alert": [
+        "./src/components/ui/alert/alert"
+      ],
+      "@/components/ui/alert-dialog": [
+        "./src/components/ui/alert-dialog/alert-dialog"
+      ],
+      "@/components/ui/aspect-ratio": [
+        "./src/components/ui/aspect-ratio/aspect-ratio"
+      ],
+      "@/components/ui/avatar": [
+        "./src/components/ui/avatar/avatar"
+      ],
+      "@/components/ui/badge": [
+        "./src/components/ui/badge/badge"
+      ],
+      "@/components/ui/breadcrumb": [
+        "./src/components/ui/breadcrumb/breadcrumb"
+      ],
+      "@/components/ui/button": [
+        "./src/components/ui/button/button"
+      ],
+      "@/components/ui/button-group": [
+        "./src/components/ui/button-group/button-group"
+      ],
+      "@/components/ui/calendar": [
+        "./src/components/ui/calendar/calendar"
+      ],
+      "@/components/ui/card": [
+        "./src/components/ui/card/card"
+      ],
+      "@/components/ui/carousel": [
+        "./src/components/ui/carousel/carousel"
+      ],
+      "@/components/ui/chart": [
+        "./src/components/ui/chart/chart"
+      ],
+      "@/components/ui/checkbox": [
+        "./src/components/ui/checkbox/checkbox"
+      ],
+      "@/components/ui/collapsible": [
+        "./src/components/ui/collapsible/collapsible"
+      ],
+      "@/components/ui/command": [
+        "./src/components/ui/command/command"
+      ],
+      "@/components/ui/context-menu": [
+        "./src/components/ui/context-menu/context-menu"
+      ],
+      "@/components/ui/dialog": [
+        "./src/components/ui/dialog/dialog"
+      ],
+      "@/components/ui/drawer": [
+        "./src/components/ui/drawer/drawer"
+      ],
+      "@/components/ui/dropdown-menu": [
+        "./src/components/ui/dropdown-menu/dropdown-menu"
+      ],
+      "@/components/ui/empty": [
+        "./src/components/ui/empty/empty"
+      ],
+      "@/components/ui/field": [
+        "./src/components/ui/field/field"
+      ],
+      "@/components/ui/form": [
+        "./src/components/ui/form/form"
+      ],
+      "@/components/ui/hover-card": [
+        "./src/components/ui/hover-card/hover-card"
+      ],
+      "@/components/ui/input": [
+        "./src/components/ui/input/input"
+      ],
+      "@/components/ui/input-group": [
+        "./src/components/ui/input-group/input-group"
+      ],
+      "@/components/ui/input-otp": [
+        "./src/components/ui/input-otp/input-otp"
+      ],
+      "@/components/ui/item": [
+        "./src/components/ui/item/item"
+      ],
+      "@/components/ui/kbd": [
+        "./src/components/ui/kbd/kbd"
+      ],
+      "@/components/ui/label": [
+        "./src/components/ui/label/label"
+      ],
+      "@/components/ui/menubar": [
+        "./src/components/ui/menubar/menubar"
+      ],
+      "@/components/ui/navigation-menu": [
+        "./src/components/ui/navigation-menu/navigation-menu"
+      ],
+      "@/components/ui/pagination": [
+        "./src/components/ui/pagination/pagination"
+      ],
+      "@/components/ui/popover": [
+        "./src/components/ui/popover/popover"
+      ],
+      "@/components/ui/progress": [
+        "./src/components/ui/progress/progress"
+      ],
+      "@/components/ui/radio-group": [
+        "./src/components/ui/radio-group/radio-group"
+      ],
+      "@/components/ui/resizable": [
+        "./src/components/ui/resizable/resizable"
+      ],
+      "@/components/ui/scroll-area": [
+        "./src/components/ui/scroll-area/scroll-area"
+      ],
+      "@/components/ui/select": [
+        "./src/components/ui/select/select"
+      ],
+      "@/components/ui/separator": [
+        "./src/components/ui/separator/separator"
+      ],
+      "@/components/ui/sheet": [
+        "./src/components/ui/sheet/sheet"
+      ],
+      "@/components/ui/sidebar": [
+        "./src/components/ui/sidebar/sidebar"
+      ],
+      "@/components/ui/sigil": [
+        "./src/components/ui/sigil/sigil"
+      ],
+      "@/components/ui/skeleton": [
+        "./src/components/ui/skeleton/skeleton"
+      ],
+      "@/components/ui/slider": [
+        "./src/components/ui/slider/slider"
+      ],
+      "@/components/ui/sonner": [
+        "./src/components/ui/sonner/sonner"
+      ],
+      "@/components/ui/spinner": [
+        "./src/components/ui/spinner/spinner"
+      ],
+      "@/components/ui/switch": [
+        "./src/components/ui/switch/switch"
+      ],
+      "@/components/ui/table": [
+        "./src/components/ui/table/table"
+      ],
+      "@/components/ui/tabs": [
+        "./src/components/ui/tabs/tabs"
+      ],
+      "@/components/ui/textarea": [
+        "./src/components/ui/textarea/textarea"
+      ],
+      "@/components/ui/toast": [
+        "./src/components/ui/toast/toast"
+      ],
+      "@/components/ui/toaster": [
+        "./src/components/ui/toaster/toaster"
+      ],
+      "@/components/ui/toggle": [
+        "./src/components/ui/toggle/toggle"
+      ],
+      "@/components/ui/toggle-group": [
+        "./src/components/ui/toggle-group/toggle-group"
+      ],
+      "@/components/ui/tooltip": [
+        "./src/components/ui/tooltip/tooltip"
+      ],
+      "@/components/ui/use-mobile": [
+        "./src/components/ui/use-mobile/use-mobile"
+      ],
+      "@/hooks/use-mobile": [
+        "./src/components/ui/use-mobile/use-mobile"
+      ],
+      "@/components/ui/use-toast": [
+        "./src/components/ui/use-toast/use-toast"
+      ],
+      "@/hooks/use-toast": [
+        "./src/components/ui/use-toast/use-toast"
+      ],
+      "@/components/ui/*": [
+        "./src/components/ui/*"
+      ]
     }
   },
   "include": [
@@ -31,5 +219,7 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

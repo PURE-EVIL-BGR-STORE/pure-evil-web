@@ -5,7 +5,9 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Toaster } from "@/components/ui/toast";
+import { Toaster } from "@/components/ui/sonner";
+import { SiteNav } from "@/components/SiteNav";
+import { SiteFooter } from "@/components/SiteFooter";
 import "../globals.css";
 
 const cinzel = Cinzel({
@@ -49,13 +51,16 @@ export default async function RootLayout({
     <html
       lang={locale}
       className={`${cinzel.variable} ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+            <SiteNav />
             {children}
-            <Toaster />
+            <SiteFooter />
+            <Toaster position="top-right" richColors />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
