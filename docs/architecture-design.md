@@ -1,644 +1,143 @@
-# PURE EVIL BGR STORE — Frontend Architecture
-
-# Architecture Design: PURE EVIL BGR STORE
+# PURE EVIL STORE — Frontend Architecture
 
 ## Overview
 The application follows a **feature-sliced design** mapped to the Next.js App Router paradigm, ensuring scalability, maintainability, and reusability. The architecture adopts atomic design principles specifically for separating UI presentation from business logic and visual effects.
 
+---
+
 ## Directory Structure
 
+```txt
+src/
+├── app/                  # Routing, layouts, and globals.css
+├── components/           # Global composite UI (SiteNav, SiteFooter, etc.)
+├── features/             # Isolated business logic modules (auth, products, etc.)
+├── i18n/                 # next-intl configuration (routing.ts, request.ts)
+├── lib/                  # Core utilities and API/infrastructure clients
+├── shared/               # Primitive UI elements, constants, shared hooks
+└── proxy.ts              # Next.js middleware (next-intl rewrite & routing)
+```
+
+---
+
 ### 1. `app/` (Next.js App Router)
-Handles routing, layout composition, and data fetching entries.
+Responsible ONLY for routing, layouts, metadata, and rendering boundaries.
 - `/api`: Backend route handlers.
-- `/(auth)`: Route group for authentication pages.
+- `/[locale]`: Internationalized route segments.
 - `layout.tsx`: Global root layout.
-- `page.tsx`: Landing page.
+- `page.tsx`: Landing page wrapper.
+- `globals.css`: Global tailwind config and root styling variables.
 
-### 2. `shared/` (Cross-feature Foundations)
-Contains atomic, highly reusable elements decoupled from specific business features.
-- `ui/`: Pure functional components (Buttons, Inputs, Cards, Typography, Icons/Sigils).
-- `styles/`: Global CSS variables, design tokens, utility classes, and global animations.
-- `types/`: Global TypeScript interfaces.
-- `lib/`: Core utilities (e.g., API clients, formatters).
+*Rule:* NEVER place complex business logic directly inside routes. Keep pages as thin wrappers.
 
-### 3. `features/` (Business Logic Modules)
-Encapsulates domain-specific logic to keep it isolated and independently maintainable.
+```tsx
+import { LoginView } from "@/features/auth/views/LoginView"
+
+export default function LoginPage() {
+  return <LoginView />
+}
+```
+
+---
+
+### 2. `features/` (Business Logic Modules)
+Encapsulates domain-specific logic. Each feature is fully isolated to keep it independently maintainable.
 - `auth/`: Authentication module.
-  - `login/`: Sub-module for the login page.
-    - `components/`: Feature-specific UI components (e.g., `login-form`, `brand-mark`).
-    - `hooks/`: Feature-specific logic (e.g., `use-login-form`, `use-login-motion`).
-    - `views/`: Compositional layers combining components into a full page view (e.g., `login-view`).
-    - `styles/`: Feature-specific CSS for complex effects (e.g., `login.css`).
+- `products/`: Products and collections module.
+- `cart/`: Shopping cart module.
+- `orders/`: Order processing module.
+- `profile/`: User profile management.
 
-### 4. `components/` (Global Composite UI)
-For larger UI blocks used globally but made from smaller `shared/ui` pieces (e.g., global navigation, footers, complex interactive modals).
+Each feature folder houses its own:
+- `components/`: Feature-specific UI components (e.g., `LoginForm.tsx`).
+- `views/`: Compositional layers combining components into a full page view (e.g., `LoginView.tsx`).
+- `hooks/`: Feature-specific logic hooks (e.g., `useLogin.ts`).
+- `services/`: API calls and queries (e.g., `authService.ts`).
+- `messages/`: Feature-specific localization files (e.g., `en.json`, `vi.json`).
+- `styles/`: Custom feature-specific CSS (e.g., `auth.css`).
+
+*Rule:* Features MUST NOT tightly couple to each other. Communication should happen through shared contracts, types, or public API layers.
+
+---
+
+### 3. `components/` (Global Composite UI)
+Global composite UI components that are used across multiple features but are not simple primitive inputs.
+- `SiteNav.tsx`: Main horizontal navigation bar.
+- `SiteFooter.tsx`: Shared footer.
+- `messages/`: Shared localization files (e.g., `en.json`, `vi.json`).
+
+---
+
+### 4. `shared/` (Design System Foundations)
+Contains primitive, highly reusable elements decoupled from specific business features.
+- `ui/`: Design system primitives (e.g., `button.tsx`, `input.tsx`, `dialog.tsx`).
+- `hooks/`: Global reusable utility hooks (e.g., `useMediaQuery.ts`).
+- `constants/`: Global constants.
+- `types/`: Shared TypeScript interfaces.
+
+*Rule:* Shared UI components MUST be generic, design-system driven, and contain no business logic.
+
+---
+
+### 5. `lib/` (Infrastructure Layer)
+Contains configurations and low-level helpers:
+- `axios.ts` / `fetcher.ts`
+- `env.ts`
+- `utils.ts` (Tailwind merge utils, classnames resolver)
+
+---
 
 ## UI & Styling Paradigm
 
 ### Separation of Concerns (SoC)
-1. **Views (`views/login-view.tsx`)**: Act strictly as orchestrators. They define the layout composition and pass down state/props but contain minimal inline styling and zero business logic.
-2. **Components (`components/*.tsx`)**: Focus strictly on rendering specific pieces of UI. They are broken down by their conceptual role (e.g., `atmosphere-background` for purely visual backgrounds, `auth-card` as a wrapper, `login-form` for interactive inputs).
-3. **Motion & State (`hooks/*.ts`)**: Animation orchestration (like delayed reveals and mount tracking) is extracted into custom hooks (e.g., `use-login-motion`) to keep the View clean.
-4. **Visual Effects (`styles/*.css`)**: Complex visual effects (gradients, noise, glows, long transition sequences) are extracted into Tailwind `@layer components` within feature-specific CSS files (e.g., `login.css`). This removes horizontal scroll from JSX and standardizes repeated effects.
+1. **Views**: Act strictly as orchestrators. They define page layout composition and pass down props but contain minimal inline styling and zero business logic.
+2. **Components**: Focus strictly on rendering specific pieces of UI.
+3. **Motion & State Hooks**: Animation orchestration (like delayed reveals and mount tracking) is extracted into custom hooks to keep UI components clean.
+4. **Visual Effects (CSS)**: Complex visual effects (gradients, noise, glows, long transition sequences) are extracted into Tailwind `@layer components` within feature-specific CSS files.
 
-### CSS Layering Strategy
-- **Base**: Global resets and native element styling.
-- **Components**: Extracted complex Tailwind patterns (e.g., `.auth-card-glow`, `.login-atmosphere`).
-- **Utilities**: One-off overrides (handled directly by standard Tailwind classes in JSX).
-
-## Best Practices Enforced
-- **No inline styles** for complex atmospheres; use extracted CSS layers.
-- **No "God Components"**: Break down views into logical chunks (Shell, Background, Card, Form).
-- **Reusable Primitives**: Inputs and Buttons must come from `shared/ui`.
-- **Hook-driven Logic**: Forms and Animations rely on custom hooks.
-
-# Overview
-
-This project follows a scalable enterprise frontend architecture using:
-
-- Next.js 16 App Router
-- TypeScript
-- TailwindCSS
-- Feature-Based Structure
-- Design System Principles
-- AI-Agent Readability Standards
-
-The architecture is optimized for:
-
-- Scalability
-- Maintainability
-- Team collaboration
-- Predictable structure
-- Fast onboarding
-- AI-assisted development
+### Design System Philosophy
+The UI follows a:
+- Minimal, dark-first luxury aesthetic
+- Brutalist precision & high contrast
+- Motion-driven interactive feedback
+- Consistent spacing scales: `4px`, `8px`, `12px`, `16px`, `24px`, `32px`, `48px`, `64px`
 
 ---
 
-# Root Structure
+## Internationalization (i18n) Architecture
 
-```txt
-src/
-├── app/
-├── components/
-├── features/
-├── hooks/
-├── lib/
-├── middleware/
-├── shared/
-├── styles/
-```
+To keep the translation bundle size minimal and prevent translation files from bloating:
+1. **Colocated Translations:** Translations are placed in local `messages/` folders within the feature or component that uses them.
+2. **Dynamic Request Configuration (`src/i18n/request.ts`):** 
+   - The middleware (`src/proxy.ts`) injects the current `x-pathname` header into request headers.
+   - The request config reads the path and dynamically imports only the common messages (`src/components/messages/`) and the specific feature messages for the active route.
+   - Merges and feeds them to `NextIntlClientProvider`.
 
 ---
 
-# 1. app/
+## Naming Conventions
 
-The `app/` directory is ONLY responsible for:
+### Components & Views
+Named in `PascalCase`. The component file and exports MUST match.
+- `LoginForm.tsx` -> `export function LoginForm() { ... }`
+- `LoginView.tsx` -> `export function LoginView() { ... }`
 
-- Routing
-- Layouts
-- Metadata
-- Route groups
-- Loading states
-- Error boundaries
-- Server Components boundaries
+### Hooks
+Named in `camelCase` with a `use` prefix.
+- `useLogin.ts`
+- `useMediaQuery.ts`
 
-NEVER place business logic directly inside routes.
-
----
-
-## Example
-
-```txt
-app/
-├── layout.tsx
-├── page.tsx
-├── globals.css
-│
-├── (auth)/
-│   ├── login/
-│   │   └── page.tsx
-│   ├── register/
-│   │   └── page.tsx
-│
-├── dashboard/
-│   ├── layout.tsx
-│   ├── page.tsx
-│   └── loading.tsx
-│
-├── api/
-│   └── auth/
-│       └── route.ts
-```
+### Helper Files & Configs
+Named in `camelCase` or `kebab-case`.
+- `env.ts`
+- `architecture-design.md`
 
 ---
 
-# Route Philosophy
-
-Each route should be VERY thin.
-
-GOOD:
-
-```tsx
-import { LoginView } from "@/features/auth/views/login-view";
-
-export default function LoginPage() {
-  return <LoginView />;
-}
-```
-
-BAD:
-
-```tsx
-export default function LoginPage() {
-  // 400 lines of business logic
-}
-```
-
----
-
-# 2. features/
-
-The `features/` directory contains ALL business/domain logic.
-
-Each feature is fully isolated.
-
----
-
-## Example
-
-```txt
-features/
-├── auth/
-│   ├── components/
-│   ├── views/
-│   ├── hooks/
-│   ├── services/
-│   ├── stores/
-│   ├── schemas/
-│   ├── types/
-│   └── utils/
-│
-├── products/
-├── cart/
-├── checkout/
-├── user/
-└── admin/
-```
-
----
-
-# Feature Rules
-
-Each feature should own:
-
-- UI related to the feature
-- Hooks
-- API calls
-- Validation schemas
-- Types
-- State management
-- Business logic
-
-Features MUST NOT tightly couple to each other.
-
-Communication should happen through:
-
-- shared/
-- lib/
-- API contracts
-
----
-
-# 3. components/
-
-Global reusable application components.
-
-Use this ONLY for generic components reused across multiple features.
-
----
-
-## Example
-
-```txt
-components/
-├── layout/
-├── navigation/
-├── modals/
-├── providers/
-├── animations/
-└── marketing/
-```
-
----
-
-# Component Rules
-
-If a component is tightly related to ONE feature:
-
-→ place it inside `features/`
-
-If reused globally:
-
-→ place it inside `components/`
-
----
-
-# 4. shared/
-
-The shared design system layer.
-
-Contains primitive reusable UI and shared contracts.
-
----
-
-## Example
-
-```txt
-shared/
-├── ui/
-│   ├── button.tsx
-│   ├── input.tsx
-│   ├── badge.tsx
-│   ├── dialog.tsx
-│   └── card.tsx
-│
-├── constants/
-├── types/
-├── configs/
-└── validators/
-```
-
----
-
-# Shared UI Rules
-
-Shared UI components MUST:
-
-- Be generic
-- Be reusable
-- Have no business logic
-- Have no feature dependency
-- Be design-system driven
-
----
-
-# 5. hooks/
-
-Global reusable hooks.
-
----
-
-## Example
-
-```txt
-hooks/
-├── use-mobile.ts
-├── use-debounce.ts
-├── use-local-storage.ts
-└── use-scroll-position.ts
-```
-
----
-
-# Hook Rules
-
-Global hooks only.
-
-Feature-specific hooks belong inside:
-
-```txt
-features/[feature]/hooks/
-```
-
----
-
-# 6. lib/
-
-Infrastructure layer.
-
-Contains:
-
-- API clients
-- Configs
-- Helpers
-- External integrations
-- Utility functions
-
----
-
-## Example
-
-```txt
-lib/
-├── axios.ts
-├── fetcher.ts
-├── env.ts
-├── utils.ts
-├── auth.ts
-├── stripe.ts
-└── logger.ts
-```
-
----
-
-# 7. middleware/
-
-Request interception layer.
-
-Used for:
-
-- Authentication
-- Redirects
-- Security
-- Headers
-- Edge logic
-
----
-
-# 8. styles/
-
-Global styling architecture.
-
----
-
-## Example
-
-```txt
-styles/
-├── globals.css
-├── typography.css
-├── animations.css
-├── themes.css
-└── utilities.css
-```
-
----
-
-# Design System Philosophy
-
-The UI system follows:
-
-- Minimal
-- Dark-first
-- Cyberpunk luxury
-- Brutalist precision
-- High contrast
-- Motion-driven feedback
-- Clean spacing hierarchy
-
----
-
-# UI Rules
-
-## Spacing
-
-Use consistent spacing scale:
-
-```txt
-4px
-8px
-12px
-16px
-24px
-32px
-48px
-64px
-```
-
----
-
-## Radius
-
-Use consistent rounded system:
-
-```txt
-rounded-md
-rounded-xl
-rounded-2xl
-```
-
-Avoid random radius values.
-
----
-
-## Typography
-
-Use clear hierarchy:
-
-```txt
-text-xs
-text-sm
-text-base
-text-lg
-text-xl
-text-2xl
-text-4xl
-```
-
----
-
-## Shadows
-
-Prefer subtle layered shadows.
-
-Avoid heavy glow spam.
-
----
-
-## Animation
-
-Use animation ONLY when it improves:
-
-- Feedback
-- Focus
-- Hierarchy
-- Interactivity
-
-Avoid decorative motion spam.
-
----
-
-# AI Agent Coding Rules
-
-AI agents MUST follow these rules:
-
----
-
-## 1. NEVER place business logic inside app routes
-
-Routes are composition layers ONLY.
-
----
-
-## 2. ALWAYS isolate features
-
-Business logic belongs in:
-
-```txt
-features/[feature]
-```
-
----
-
-## 3. KEEP components small
-
-Preferred:
-
-- 50–150 LOC per component
-
-Avoid:
-
-- 500+ line mega components
-
----
-
-## 4. USE composition over inheritance
-
-Prefer:
-
-```tsx
-<Card>
-  <CardHeader />
-  <CardContent />
-</Card>
-```
-
-Avoid giant prop APIs.
-
----
-
-## 5. NEVER duplicate UI patterns
-
-Create reusable primitives.
-
----
-
-## 6. USE absolute imports
-
-GOOD:
-
-```tsx
-import { Button } from "@/shared/ui/button";
-```
-
-BAD:
-
-```tsx
-import { Button } from "../../../shared/ui/button";
-```
-
----
-
-# Naming Convention
-
----
-
-## Components
-
-```txt
-PascalCase
-```
-
-Example:
-
-```txt
-LoginForm.tsx
-ProductCard.tsx
-```
-
----
-
-## Hooks
-
-```txt
-camelCase with use prefix
-```
-
-Example:
-
-```txt
-useLogin.ts
-useCart.ts
-```
-
----
-
-## Files
-
-```txt
-kebab-case
-```
-
-Example:
-
-```txt
-login-form.tsx
-product-card.tsx
-```
-
----
-
-# State Management
-
-Preferred order:
-
-1. Local state
-2. URL state
-3. Context
-4. Zustand
-5. Server cache
-
-Avoid global state abuse.
-
----
-
-# Data Fetching
-
-Preferred:
-
-- Server Components
-- Server Actions
-- React Query (client cache)
-- Streaming/Suspense
-
-Avoid unnecessary client fetching.
-
----
-
-# Performance Rules
-
-ALWAYS:
-
-- Lazy load heavy components
-- Use dynamic imports
-- Optimize images
-- Avoid unnecessary rerenders
-- Memoize expensive computations
-- Keep bundle size minimal
-
----
-
-# Security Rules
-
-NEVER:
-
-- Expose secrets client-side
-- Trust frontend validation only
-- Store sensitive tokens insecurely
-- Use unsafe HTML rendering
-
----
-
-# Final Philosophy
-
-The codebase should feel:
-
-- Predictable
-- Structured
-- Minimal
-- Modular
-- Fast
-- Elegant
-- Maintainable
-- AI-readable
-- Enterprise-ready
+## AI Agent Coding Rules
+
+1. **NEVER** place business logic inside app routes.
+2. **ALWAYS** isolate feature-specific logic inside `features/[feature]`.
+3. **KEEP** components focused and small (ideally 50–150 LOC).
+4. **USE** absolute path imports (e.g., `import { Button } from "@/shared/ui/button"`).
+5. **NEVER** commit secrets, API keys, or hardcoded sensitive credentials.
