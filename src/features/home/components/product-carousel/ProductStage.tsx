@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect, useRef } from 'react'
 import { motion, PanInfo } from 'framer-motion'
-import { ChevronLeft, ChevronRight, ShoppingBag } from 'lucide-react'
-import { Product } from './product.constants'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { Product } from '@/shared/constants/products'
 import { Button } from '@/components/ui/button/button'
 import { Link } from '@/i18n/routing'
 
@@ -11,14 +11,12 @@ export interface ProductStageProps {
   activeIndex: number
   setActiveIndex: React.Dispatch<React.SetStateAction<number>>
   products: Product[]
-  handleAcquire: (product: Product) => void
 }
 
 export const ProductStage = ({
   activeIndex,
   setActiveIndex,
   products,
-  handleAcquire,
 }: ProductStageProps): React.ReactElement => {
   const containerRef = useRef<HTMLDivElement>(null)
   const [dimensions, setDimensions] = useState({ width: 0, height: 320 })
@@ -62,11 +60,8 @@ export const ProductStage = ({
     return diff
   }
 
-  // Calculate card sizes to fit the container height with 3:4 aspect ratio
   const cardHeight = dimensions.height * 0.95
   const cardWidth = cardHeight * 0.75
-
-  // Spacing scales with the card size so layout remains perfectly proportional
   const cardSpacing = cardWidth * 0.8
   const baseScale = 0.75
   const activeDepth = 150
@@ -138,7 +133,7 @@ export const ProductStage = ({
                 <div className="absolute inset-0 bg-black/70 backdrop-blur-[3px] opacity-0 hover:opacity-100 transition-opacity duration-300 z-30 flex flex-col items-center justify-center gap-4 p-6">
                   <Button
                     variant="ritual"
-                    className="w-full max-w-[160px] h-auto !py-2 !px-4 font-mono !text-[10px] tracking-[0.2em] font-semibold flex items-center justify-center gap-2"
+                    className="w-full max-w-[160px] h-auto !py-2 !px-4 font-mono !text-xs tracking-[0.2em] font-semibold flex items-center justify-center gap-2"
                     asChild
                   >
                     <Link href={`/collection/${prod.id}`} onClick={(e) => e.stopPropagation()}>
@@ -152,7 +147,7 @@ export const ProductStage = ({
                 <div className="absolute inset-0 border border-red-500/20 pointer-events-none z-20 animate-pulse" />
               )}
 
-              <div className="absolute top-3 left-3 right-3 flex items-center justify-between font-mono text-[8px] text-zinc-500 z-20">
+              <div className="absolute top-3 left-3 right-3 flex items-center justify-between font-mono text-xs text-zinc-500 z-20">
                 <span>{prod.code}</span>
                 <span className={isActive ? 'text-red-500' : ''}>
                   {isActive ? 'ACTIVE_SYS' : 'STDBY'}
@@ -165,16 +160,15 @@ export const ProductStage = ({
                   src={prod.img}
                   alt={prod.name}
                   draggable={false}
-                  className={`w-full h-full object-cover transition-transform duration-1000 ${isActive ? 'scale-105' : 'scale-95'
-                    } ${prod.cropClass || 'object-center'}`}
+                  className="w-full h-full object-cover transition-transform duration-1000 object-center"
                 />
               </div>
 
               <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black via-black/80 to-transparent z-10 pointer-events-none" />
 
               <div className="absolute bottom-4 left-4 right-4 z-20 flex justify-between items-end font-mono">
-                <span className="text-[9px] text-zinc-400 uppercase tracking-wider">{prod.name}</span>
-                <span className="text-[10px] text-red-500 font-semibold">${prod.price}</span>
+                <span className="text-xs text-zinc-400 uppercase tracking-wider">{prod.name}</span>
+                <span className="text-xs text-red-500 font-semibold">${prod.price}</span>
               </div>
             </motion.div>
           )

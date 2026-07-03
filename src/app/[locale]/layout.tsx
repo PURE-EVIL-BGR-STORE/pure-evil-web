@@ -6,8 +6,6 @@ import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
-import { SiteNav } from "@/components/SiteNav";
-import { SiteFooter } from "@/components/SiteFooter";
 import "../globals.css";
 
 const cinzel = Cinzel({
@@ -31,6 +29,8 @@ export const metadata: Metadata = {
   description: "A store for all your evil needs.",
   icons: { icon: "/PURE_EVIL_LOGO_4.png" },
 };
+
+import { CartProvider } from "@/features/cart/context/CartContext";
 
 export default async function RootLayout({
   children,
@@ -83,10 +83,10 @@ export default async function RootLayout({
       <body className="min-h-full flex flex-col bg-background" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-            <SiteNav />
-            {children}
-            <SiteFooter />
-            <Toaster position="top-right" richColors />
+            <CartProvider>
+              {children}
+              <Toaster position="top-right" richColors />
+            </CartProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

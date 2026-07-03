@@ -10,7 +10,7 @@ import { useMediaQuery } from '@/shared/hooks/useMediaQuery'
 import { MEDIA_QUERIES } from '@/shared/constants/breakpoints'
 import { Button } from '@/components/ui/button/button'
 import { ProductStage } from '../product-carousel/ProductStage'
-import { Product } from '../product-carousel/product.constants'
+import { Product } from '@/shared/constants/products'
 import { toast } from 'sonner'
 import { ShoppingBag } from 'lucide-react'
 
@@ -19,18 +19,22 @@ const HERO_PRODUCTS: Product[] = [
     id: 'ritual-hoodie',
     name: 'RITUAL DESTROYED HOODIE',
     price: 189,
-    spec: '600 GSM Â· loopback fleece',
+    originalPrice: 240,
+    spec: '600 GSM · loopback fleece',
     desc: 'Heavyweight Japanese loopback fleece, garment-dyed in true obsidian.',
     img: '/images/collections/void.png',
+    category: 'APPAREL',
     code: 'PE-RH-001'
   },
   {
     id: 'slashed-longsleeve',
     name: 'SLASHED LONGSLEEVE',
     price: 129,
+    originalPrice: 169,
     spec: 'distressed cotton',
     desc: 'Technical long sleeve shirt with slashed detailing.',
     img: '/images/hero_model.png',
+    category: 'APPAREL',
     code: 'PE-SL-002',
     cropClass: 'object-[center_18%]'
   },
@@ -38,9 +42,11 @@ const HERO_PRODUCTS: Product[] = [
     id: 'shadow-cargo',
     name: 'SHADOW CARGO PANTS',
     price: 159,
+    originalPrice: 199,
     spec: 'heavy canvas',
     desc: 'Obsidian cargo pants with custom D-rings.',
     img: '/images/hero_model.png',
+    category: 'TROUSERS',
     code: 'PE-SC-003',
     cropClass: 'object-[center_bottom]'
   }
@@ -77,18 +83,11 @@ export function Hero(): React.ReactElement {
     scrollClass,
   } = useSigilAnimation()
 
-  useEmberParticles(canvasRef, embersActive, true, isMobile ? 40 : 120)
-
   const isTextVisible = phase !== 'idle' && phase !== 'drawing'
 
   const handleAcquire = (product: Product): void => {
     toast.success(`${product.name} [Size ${selectedSize}] acquired successfully.`, {
-      style: {
-        background: 'var(--panel)',
-        border: '1px solid rgba(197, 20, 27, 0.4)',
-        color: 'var(--fg)',
-        fontFamily: 'var(--font-mono)',
-      },
+      className: 'gothic-toast',
       icon: <ShoppingBag className="text-red-500 w-4 h-4" />,
     })
   }
@@ -163,7 +162,7 @@ export function Hero(): React.ReactElement {
         {/* Row 8-18: Product Carousel (Desktop) or Logo + Shop Now (Mobile) */}
         <div
           className="col-start-2 col-span-3 flex flex-col justify-center items-center w-full h-full overflow-hidden pointer-events-auto"
-          style={{ gridRow: '9 / 18' }}
+          style={{ gridRow: '7 / 18' }}
         >
           <AnimatePresence>
             {isTextVisible && (
@@ -184,7 +183,7 @@ export function Hero(): React.ReactElement {
                     />
                     <Button
                       variant="ritual"
-                      className="w-full py-3.5 px-6 font-mono text-[10px] tracking-[0.25em] font-semibold flex items-center justify-center"
+                      className="w-full py-3.5 px-6 font-mono text-xs tracking-[0.25em] font-semibold flex items-center justify-center"
                       asChild
                     >
                       <Link href="/collection">
@@ -197,7 +196,6 @@ export function Hero(): React.ReactElement {
                     activeIndex={activeIndex}
                     setActiveIndex={setActiveIndex}
                     products={HERO_PRODUCTS}
-                    handleAcquire={handleAcquire}
                   />
                 )}
               </motion.div>

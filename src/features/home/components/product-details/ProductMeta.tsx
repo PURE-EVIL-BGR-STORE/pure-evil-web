@@ -3,6 +3,8 @@ import { ShoppingBag } from 'lucide-react'
 import { toast } from 'sonner'
 import { Product } from '@/shared/constants/products'
 
+import { useCart } from '@/features/cart/context/CartContext'
+
 export interface ProductMetaProps {
   product: Product
   showBagAction?: boolean
@@ -23,20 +25,10 @@ export function ProductMeta({
   showSizes = true,
 }: ProductMetaProps): React.ReactElement {
   const [activeSize, setActiveSize] = useState('S')
+  const { addToCart } = useCart()
 
   const handleAddToBag = () => {
-    toast.success(`ADDED TO BAG: ${product.name} (SIZE ${activeSize})`, {
-      style: {
-        background: '#0c0c0c',
-        border: '1px solid var(--red)',
-        color: '#f5f3f1',
-        fontFamily: 'var(--font-mono)',
-        fontSize: '11px',
-        letterSpacing: '0.15em',
-        borderRadius: '4px',
-      },
-      duration: 3000,
-    })
+    addToCart(product, 1, activeSize)
   }
 
   return (
@@ -74,7 +66,7 @@ export function ProductMeta({
 
       {showBagAction && (
         <div className="drop__actions" data-reveal data-reveal-delay="3">
-          <button className="btn btn--primary w-full max-w-[280px] flex items-center justify-center gap-2 cursor-pointer" onClick={handleAddToBag}>
+          <button className="btn btn--primary flex items-center justify-center gap-2 cursor-pointer" onClick={handleAddToBag}>
             <ShoppingBag size={14} />
             <span>Add to Bag — ${product.price}</span>
           </button>

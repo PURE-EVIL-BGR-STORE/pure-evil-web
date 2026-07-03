@@ -3,11 +3,13 @@ import { Atmosphere } from '../components/Atmosphere'
 import { RevealController } from '../components/RevealController'
 import { Hero } from '../components/hero/Hero'
 import { Ticker } from '../components/Ticker'
-import { ProductCarousel } from '../components/product-carousel/ProductCarousel'
-import { Manifesto } from '../components/Manifesto'
 import { FeaturedDrop } from '../components/FeaturedDrop'
+import { CategoryGrid } from '../components/CategoryGrid'
+import { Manifesto } from '../components/Manifesto'
+import { BestSellersGrid } from '../components/BestSellersGrid'
 import { Lookbook } from '../components/Lookbook'
 import { Cult } from '../components/Cult'
+import { SectionContainer } from '@/components/SectionContainer'
 
 export function HomeView(): React.ReactElement {
   return (
@@ -17,11 +19,22 @@ export function HomeView(): React.ReactElement {
       <main>
         <Hero />
         <Ticker />
-        <ProductCarousel />
-        <Manifesto />
-        <FeaturedDrop />
+        <SectionContainer>
+          <FeaturedDrop />
+        </SectionContainer>
+        <SectionContainer>
+          <CategoryGrid />
+        </SectionContainer>
+        <SectionContainer>
+          <Manifesto />
+        </SectionContainer>
+        <SectionContainer>
+          <BestSellersGrid />
+        </SectionContainer>
         <Lookbook />
-        <Cult />
+        <SectionContainer>
+          <Cult />
+        </SectionContainer>
       </main>
     </>
   )

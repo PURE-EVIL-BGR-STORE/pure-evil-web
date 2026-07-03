@@ -14,7 +14,7 @@ export function ProductVisual({ img, alt, stamp }: ProductVisualProps): React.Re
       <img
         src={img}
         alt={alt}
-        className="w-full h-full object-cover transition-transform duration-1000 hover:scale-[1.04]"
+        className="" // Remove all image styling - let CSS handle it
       />
     </div>
   )

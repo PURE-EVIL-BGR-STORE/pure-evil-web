@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { DemonicEye } from './DemonicEye'
 
 const EYES_OFFSET_Y = '-4vh'
-const EYES_SCALE = 1.4
+const EYES_SCALE = 1.2
 
 export interface DemonicEyesSectionProps {
   isMobile: boolean
