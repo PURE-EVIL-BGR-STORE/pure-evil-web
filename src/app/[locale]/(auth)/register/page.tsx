@@ -1,16 +1,10 @@
-import type { Metadata } from "next";
-import { Atmosphere } from "@/features/home";
-import { RegisterView } from "@/features/auth/register/RegisterView";
+import type { Metadata } from 'next'
+import { AuthContainer } from '@/features/auth/AuthContainer'
 
 export const metadata: Metadata = {
-  title: "Initiate Profile — PURE EVIL",
-};
+  title: 'Initiate Profile — PURE EVIL'
+}
 
 export default function RegisterPage() {
-  return (
-    <>
-      <Atmosphere />
-      <RegisterView />
-    </>
-  );
+  return <AuthContainer initialIsLogin={false} />
 }

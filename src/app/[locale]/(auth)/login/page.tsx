@@ -1,16 +1,10 @@
-import type { Metadata } from "next";
-import { Atmosphere } from "@/features/home";
-import { LoginView } from "@/features/auth/login/LoginView";
+import type { Metadata } from 'next'
+import { AuthContainer } from '@/features/auth/AuthContainer'
 
 export const metadata: Metadata = {
-  title: "Sign In — PURE EVIL",
-};
+  title: 'Sign In — PURE EVIL'
+}
 
 export default function LoginPage() {
-  return (
-    <>
-      <Atmosphere />
-      <LoginView />
-    </>
-  );
+  return <AuthContainer initialIsLogin={true} />
 }
