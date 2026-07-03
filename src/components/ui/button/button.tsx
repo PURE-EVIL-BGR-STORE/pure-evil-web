@@ -20,9 +20,9 @@ const buttonVariants = cva(
           'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
         link: 'text-primary underline-offset-4 hover:underline',
         ritual:
-          'btn btn--primary btn--interactive rounded-none font-mono text-[11px] tracking-[0.25em]',
+          'btn btn--primary btn--interactive rounded-none font-mono text-xs tracking-[0.25em]',
         'ritual-ghost':
-          'btn btn--ghost btn--interactive rounded-none font-mono text-[11px] tracking-[0.25em]',
+          'btn btn--ghost btn--interactive rounded-none font-mono text-xs tracking-[0.25em]',
       },
       size: {
         default: 'h-9 px-4 py-2 has-[>svg]:px-3',
@@ -31,7 +31,7 @@ const buttonVariants = cva(
         icon: 'size-9',
         'icon-sm': 'size-8',
         'icon-lg': 'size-10',
-        ritual: 'h-auto py-[18px] px-[44px]',
+        ritual: 'h-auto py-4 px-10',
       },
     },
     defaultVariants: {

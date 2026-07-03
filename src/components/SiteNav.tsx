@@ -1,103 +1,152 @@
-"use client";
+'use client'
 
-import { useState, useEffect, useRef } from "react";
-import { Link } from "@/i18n/routing";
-import { Menu, X, ShoppingBag } from "lucide-react";
+import React, { useState, useEffect, useRef } from 'react'
+import { Link } from '@/i18n/routing'
+import { Menu, X, ShoppingBag } from 'lucide-react'
+import { CartDrawer } from '@/components/CartDrawer'
 
-export function SiteNav() {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  const lastScrollYRef = useRef(0);
+export function SiteNav(): React.ReactElement {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
+  const lastScrollYRef = useRef(0)
+
+  const [user, setUser] = useState<{ username: string } | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    window.dispatchEvent(new CustomEvent("navMenuToggle", { detail: { open: isMobileMenuOpen } }));
-  }, [isMobileMenuOpen]);
+    window.dispatchEvent(new CustomEvent('navMenuToggle', { detail: { open: isMobileMenuOpen } }))
+  }, [isMobileMenuOpen])
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+      const currentScrollY = window.scrollY
+      setIsScrolled(currentScrollY > 40)
 
-      // Update scrolled state for styling
-      setIsScrolled(currentScrollY > 40);
-
-      const diff = currentScrollY - lastScrollYRef.current;
+      const diff = currentScrollY - lastScrollYRef.current
 
       if (currentScrollY <= 100) {
-        // Always show near the top
-        setIsVisible(true);
+        setIsVisible(true)
       } else if (diff > 5) {
-        // Scrolling down clearly -> hide
-        setIsVisible(false);
+        setIsVisible(false)
       } else if (diff < -5) {
-        // Scrolling up clearly -> show
-        setIsVisible(true);
+        setIsVisible(true)
       }
 
-      lastScrollYRef.current = currentScrollY;
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+      lastScrollYRef.current = currentScrollY
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Fetch session on mount
+  useEffect(() => {
+    let active = true
+    fetch('/api/auth/session')
+      .then((res) => res.json())
+      .then((data) => {
+        if (active) {
+          if (data.authenticated && data.user) {
+            setUser({ username: data.user.username })
+          } else {
+            setUser(null)
+          }
+          setLoading(false)
+        }
+      })
+      .catch((err) => {
+        console.error('Session fetch failed', err)
+        if (active) {
+          setLoading(false)
+        }
+      })
+    return () => {
+      active = false
+    }
+  }, [])
+
+  const handleLogout = async () => {
+    try {
+      const res = await fetch('/api/auth/logout', { method: 'POST' })
+      if (res.ok) {
+        setUser(null)
+        window.location.reload()
+      }
+    } catch (err) {
+      console.error('Logout failed', err)
+    }
+  }
 
   return (
     <>
       {/* Morphing Horizontal Navigation Bar */}
       <header
-        className={`nav ${isScrolled ? "shrunk" : ""} ${isMobileMenuOpen ? "shrunk" : ""} ${(!isVisible && !isMobileMenuOpen) ? "nav-hidden" : ""}`}
+        className={`nav ${isScrolled ? 'shrunk' : ''} ${isMobileMenuOpen ? 'shrunk' : ''} ${
+          !isVisible && !isMobileMenuOpen ? 'nav-hidden' : ''
+        }`}
         data-screen-label="nav"
       >
-        <a
-          className="nav__mark"
-          href="/"
-          aria-label="PURE EVIL home"
-          onClick={(e) => {
-            e.preventDefault();
-            setIsMobileMenuOpen(false);
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/PURE_EVIL_LOGO_4.png" alt="PURE EVIL emblem" />
-          <span className="nav__wordmark">Pure Evil</span>
-        </a>
-
-        {/* Desktop Navigation Links */}
-        <nav className="nav__links">
-          <Link href="/collection">Collection</Link>
-          <a href="#lookbook">Lookbook</a>
-          <a href="#manifesto">Manifesto</a>
-        </nav>
-
-        <div className="nav__util">
-          <Link href="/login" className="nav__search">
-            Sign In
-          </Link>
-          <a href="#cult" className="nav__cart">
-            Bag <span className="nav__cart-count">(0)</span>
+        <div className="section-container flex items-center justify-between w-full">
+          <a
+            className="nav__mark"
+            href="/"
+            aria-label="PURE EVIL home"
+            onClick={(e) => {
+              e.preventDefault()
+              setIsMobileMenuOpen(false)
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/PURE_EVIL_LOGO_4.png" alt="PURE EVIL emblem" />
+            <span className="nav__wordmark">Pure Evil</span>
           </a>
 
-          {/* Interactive Mobile Burger Trigger */}
-          <button
-            className="nav__burger"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={isMobileMenuOpen}
-          >
-            {isMobileMenuOpen ? (
-              <X size={20} className="text-fg" />
+          {/* Desktop Navigation Links */}
+          <nav className="nav__links">
+            <Link href="/collection">Collection</Link>
+            <a href="#lookbook">Lookbook</a>
+            <a href="#manifesto">Manifesto</a>
+          </nav>
+
+          <div className="nav__util">
+            {!loading && user ? (
+              <div className="flex items-center gap-4">
+                <span className="font-mono text-xs uppercase tracking-wider text-red">
+                  {user.username}
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="font-mono text-xs uppercase tracking-wider text-muted hover:text-fg transition-colors cursor-pointer"
+                >
+                  Logout
+                </button>
+              </div>
             ) : (
-              <Menu size={20} className="text-fg" />
+              <Link href="/login" className="nav__search">
+                Sign In
+              </Link>
             )}
-          </button>
+            <CartDrawer />
+
+            {/* Interactive Mobile Burger Trigger */}
+            <button
+              className="nav__burger"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isMobileMenuOpen}
+            >
+              {isMobileMenuOpen ? (
+                <X size={20} className="text-fg" />
+              ) : (
+                <Menu size={20} className="text-fg" />
+              )}
+            </button>
+          </div>
         </div>
       </header>
 
-      {/* Fullscreen Mobile Drawer Menu */}
-      <div
-        className={`mobile-drawer ${isMobileMenuOpen ? "is-open" : ""}`}
-        style={{ zIndex: 999 }}
-      >
+      <div className={`mobile-drawer ${isMobileMenuOpen ? 'is-open' : ''}`} style={{ zIndex: 999 }}>
         {/* Mobile Navigation Links */}
         <nav className="flex flex-col items-center gap-8">
           <Link
@@ -121,22 +170,35 @@ export function SiteNav() {
           >
             Manifesto
           </a>
-          <Link
-            href="/login"
-            className="text-2xl font-serif uppercase tracking-[0.2em] text-red hover:text-white transition-colors"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Sign In
-          </Link>
-          <a
-            href="#cult"
-            className="text-lg font-mono tracking-wider text-muted border border-fg/10 px-6 py-2 hover:border-red transition-colors flex items-center gap-2"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            <ShoppingBag size={16} /> Bag (0)
-          </a>
+          
+          {!loading && user ? (
+            <div className="flex flex-col items-center gap-4">
+              <span className="text-xl font-serif uppercase tracking-[0.2em] text-red">
+                {user.username}
+              </span>
+              <button
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  handleLogout()
+                }}
+                className="text-lg font-mono tracking-wider text-muted hover:text-fg transition-colors cursor-pointer"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link
+              href="/login"
+              className="text-2xl font-serif uppercase tracking-[0.2em] text-red hover:text-white transition-colors"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Sign In
+            </Link>
+          )}
+
+          <CartDrawer mobile onCloseMobileMenu={() => setIsMobileMenuOpen(false)} />
         </nav>
       </div>
     </>
-  );
+  )
 }
