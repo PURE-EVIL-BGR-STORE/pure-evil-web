@@ -8,6 +8,7 @@ export interface Product {
   img: string
   category: string
   code: string
+  cropClass?: string
 }
 
 export const PRODUCTS: Product[] = [

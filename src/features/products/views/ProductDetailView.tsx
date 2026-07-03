@@ -31,9 +31,9 @@ export function ProductDetailView({ id }: ProductDetailViewProps): React.ReactEl
     <>
       <RevealController />
 
-      <main className="flex-grow pt-6 pb-20 px-4 lg:px-[clamp(20px,5vw,96px)] max-w-[1480px] mx-auto w-full">
+      <main className="flex-grow shop-page w-full max-w-[1480px] mx-auto relative">
         {/* Breadcrumb */}
-        <div className="flex items-center gap-2 text-faint font-mono text-[10px] uppercase tracking-[0.2em] mb-12">
+        <div className="flex items-center gap-2 text-faint font-mono text-xs uppercase tracking-[0.2em] mb-12">
           <Link href="/" className="hover:text-fg transition-colors">HOME</Link>
           <ChevronRight size={10} />
           <Link href="/collection" className="hover:text-fg transition-colors">COLLECTION</Link>
