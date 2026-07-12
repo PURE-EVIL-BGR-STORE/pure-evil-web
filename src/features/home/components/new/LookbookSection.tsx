@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from 'react'
 import { Chapter } from '@/components/Chapter'
 import { PRODUCTS } from '@/shared/constants/products'
+import { useTranslations } from 'next-intl'
 
 type Shot = {
   size: 't' | 's' | 'w' | 'xt'
@@ -96,6 +97,7 @@ interface FlipCardProps {
 }
 
 function FlipCard({ shot, product, flipped, index }: FlipCardProps): React.ReactElement {
+  const t = useTranslations('Home')
   // Deterministic Latin Square delay matrix to ensure that no two adjacent cards
   // in the same row rotate at the exact same time.
   // Col 0: items 0,1,2 | Col 1: items 3,4,5 | Col 2: items 6,7,8
@@ -179,11 +181,11 @@ function FlipCard({ shot, product, flipped, index }: FlipCardProps): React.React
             {/* Product info */}
             <div className="flex flex-col gap-1 z-10 mt-auto">
               <div className="flex justify-between items-baseline">
-                <span className="font-mono text-[9px] text-blood uppercase tracking-widest">{product.category}</span>
+                <span className="font-mono text-[9px] text-blood uppercase tracking-widest">{t(`${product.category.toLowerCase()}Title`, { defaultValue: product.category })}</span>
                 <span className="font-mono text-[9px] text-muted-foreground">{product.code}</span>
               </div>
               <h4 className="font-display text-sm font-bold text-bone uppercase group-hover:text-blood transition-colors truncate">
-                {product.name}
+                {t(`products.${product.id}.name`, { defaultValue: product.name })}
               </h4>
               <div className="flex justify-between items-baseline mt-1">
                 <span className="font-mono text-xs text-bone">${product.price} USD</span>
@@ -201,13 +203,14 @@ function FlipCard({ shot, product, flipped, index }: FlipCardProps): React.React
 
 export function LookbookSection(): React.ReactElement {
   const [flipped, setFlipped] = useState(false)
+  const t = useTranslations('Home')
 
   return (
     <Chapter
       id="lookbook"
-      number="IV"
-      title="The Ritual"
-      prev={{ id: 'manifesto', number: 'III', title: 'Manifesto' }}
+      number="V"
+      title={t('lookbookTitle')}
+      prev={{ id: 'manifesto', number: 'IV', title: t('manifestoTitle') }}
     >
       <div
         className="max-w-5xl mx-auto w-full"
@@ -221,7 +224,7 @@ export function LookbookSection(): React.ReactElement {
             className="border border-border hover:border-blood px-4 py-2 text-[9px] font-mono uppercase tracking-[0.2em] text-muted-foreground hover:text-bone transition-colors duration-300 flex items-center gap-2 select-none cursor-pointer"
           >
             <span className={`w-1.5 h-1.5 rounded-full ${flipped ? 'bg-blood animate-pulse' : 'bg-muted-foreground/30'}`} />
-            {flipped ? 'VIEW IMAGES' : 'REVEAL RELICS'}
+            {flipped ? t('lookbookViewImages') : t('lookbookRevealRelics')}
           </button>
         </div>
 

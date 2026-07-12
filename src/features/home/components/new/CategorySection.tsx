@@ -3,6 +3,7 @@
 import React from 'react'
 import { Link } from '@/i18n/routing'
 import { Chapter } from '@/components/Chapter'
+import { useTranslations } from 'next-intl'
 
 interface Category {
   title: string
@@ -12,37 +13,39 @@ interface Category {
   idx: string
 }
 
-const CATEGORIES: Category[] = [
-  {
-    title: 'OUTERWEAR',
-    subtitle: 'Technical cowls, modular shells, knit drapes',
-    img: '/look_ascension.png',
-    href: '/collection?category=OUTERWEAR',
-    idx: '01',
-  },
-  {
-    title: 'APPAREL',
-    subtitle: 'Heavyweight fleece, raw edges, spine sigils',
-    img: '/void_hoodie_studio.png',
-    href: '/collection?category=APPAREL',
-    idx: '02',
-  },
-  {
-    title: 'TROUSERS',
-    subtitle: 'Triple-weave canvas, modular cargo systems',
-    img: '/look_hardware.png',
-    href: '/collection?category=TROUSERS',
-    idx: '03',
-  },
-]
-
 export function CategorySection(): React.ReactElement {
+  const t = useTranslations('Home')
+
+  const CATEGORIES: Category[] = [
+    {
+      title: t('outerwearTitle'),
+      subtitle: t('outerwearSubtitle'),
+      img: '/look_ascension.png',
+      href: '/collection?category=OUTERWEAR',
+      idx: '01',
+    },
+    {
+      title: t('apparelTitle'),
+      subtitle: t('apparelSubtitle'),
+      img: '/void_hoodie_studio.png',
+      href: '/collection?category=APPAREL',
+      idx: '02',
+    },
+    {
+      title: t('trousersTitle'),
+      subtitle: t('trousersSubtitle'),
+      img: '/look_hardware.png',
+      href: '/collection?category=TROUSERS',
+      idx: '03',
+    },
+  ]
+
   return (
     <Chapter
       id="classification"
       number="II"
-      title="Classification"
-      prev={{ id: 'ch-01', number: 'I', title: 'Featured' }}
+      title={t('categoryTitle')}
+      prev={{ id: 'ch-01', number: 'I', title: t('categoryPrevTitle') }}
     >
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 w-full relative z-10">
         {CATEGORIES.map((cat) => (
@@ -67,7 +70,7 @@ export function CategorySection(): React.ReactElement {
             <div className="absolute top-6 left-6 z-20 font-mono text-[10px] text-muted-foreground/60 flex items-center gap-2">
               <span>{cat.idx}</span>
               <span className="w-4 h-[1px] bg-border group-hover:bg-blood transition-colors" />
-              <span className="uppercase tracking-widest text-[9px] group-hover:text-blood transition-colors">SYS_CAT</span>
+              <span className="uppercase tracking-widest text-[9px] group-hover:text-blood transition-colors">{t('categorySys')}</span>
             </div>
 
             {/* Bottom text & call-to-actions */}
@@ -82,7 +85,7 @@ export function CategorySection(): React.ReactElement {
               {/* Arrow indicator */}
               <div className="mt-6 flex items-center gap-2 text-muted-foreground group-hover:text-bone transition-colors duration-300">
                 <span className="text-[9px] font-mono tracking-[0.2em] uppercase font-semibold">
-                  ENTER ARCHIVE
+                  {t('categoryEnter')}
                 </span>
                 <span className="text-xs transition-transform group-hover:translate-x-1.5 duration-300">
                   →

@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Link } from '@/i18n/routing'
 import { Menu, X } from 'lucide-react'
 import { useCart } from '@/features/cart/context/CartContext'
+import { SettingsMenu } from './SettingsMenu'
+
 
 export function SiteHeaderNew(): React.ReactElement {
   const { cart } = useCart()
@@ -136,6 +138,9 @@ export function SiteHeaderNew(): React.ReactElement {
                 {String(cart.totalQuantity).padStart(2, '0')}
               </span>
             </button>
+
+            {/* Settings Menu */}
+            <SettingsMenu />
 
             {/* Mobile burger */}
             <button

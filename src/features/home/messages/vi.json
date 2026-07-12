@@ -2,9 +2,118 @@
   "Home": {
     "title": "CỬA HÀNG PURE EVIL",
     "description": "Cửa hàng đáp ứng mọi nhu cầu hắc ám của bạn.",
-    "heroTitle": "ÁO HOODIE RITUAL DESTROYED",
-    "heroSub": "600 GSM · nỉ loopback",
-    "shopNow": "MUA NGAY",
-    "scroll": "Cuộn xuống"
+    "scroll": "Cuộn xuống",
+
+    "heroFeatured": "CHƯƠNG I / NỔI BẬT",
+    "heroDrop": "Bộ sưu tập 2026.07",
+    "heroTitleFirst": "Đúc trong",
+    "heroTitleSecond": "bóng tối.",
+    "heroButton": "Bắt đầu nghi thức",
+    "heroLocation": "Berlin · Porto · Hiện tại",
+    "heroScroll": "↓ Cuộn xuống · CH. II",
+
+    "categoryTitle": "Phân loại",
+    "categoryPrevTitle": "Nổi bật",
+    "categorySys": "HỆ_THỐNG_MỤC",
+    "categoryEnter": "VÀO KHO LƯU TRỮ",
+    "outerwearTitle": "ÁO KHOÁC NGOÀI",
+    "outerwearSubtitle": "Mũ trùm kỹ thuật, áo khoác mô-đun, len rũ",
+    "apparelTitle": "TRANG PHỤC",
+    "apparelSubtitle": "Nỉ dày, viền cắt thô, họa tiết sigil dọc sống lưng",
+    "trousersTitle": "QUẦN DÀI",
+    "trousersSubtitle": "Vải canvas dệt ba lớp, hệ thống quần túi hộp mô-đun",
+
+    "bestSellersEyebrow": "[ HÀNG ĐANG BÁN ]",
+    "bestSellersTitle": "Thành phần Hệ thống",
+    "addToBag": "THÊM VÀO GIỎ",
+    "limited": "GIỚI HẠN",
+
+    "manifestoTitle": "Tuyên ngôn",
+    "manifestoPrevTitle": "Phân loại",
+    "manifestoHeading1": "Chúng tôi không phải",
+    "manifestoHeading2": "một thương hiệu quần áo.",
+    "manifestoHeading3": "Chúng tôi là ",
+    "manifestoHeading3Accent": "bản sắc",
+    "manifestoHeading3End": "—",
+    "manifestoHeading4": "sự hiển hiện của ám ảnh,",
+    "manifestoHeading5": "kỷ luật & bạo lực thẩm mỹ.",
+    "manifestoDocTitle": "Học thuyết",
+    "manifestoDocDesc": "Mỗi trang phục là một nghi thức. Đường cắt sắc nét, nhuộm màu obsidian, mang dấu ấn sigil. Được mặc bởi những kẻ khước từ điều tầm thường.",
+    "manifestoMatTitle": "Chất liệu",
+    "manifestoMatDesc": "Vải nỉ Nhật Bản siêu dày, cấu trúc viền thô cắt cạnh, phụ kiện kim loại oxy hóa. Được tạo ra để tồn tại lâu hơn những xu hướng sợ hãi nó.",
+    "manifestoCodeTitle": "Mật mã",
+    "manifestoCodeDesc": "Kỷ luật xây dựng tự do. Kiềm chế trở thành sức mạnh.",
+    "taglineDark": "Chúng ta không đuổi theo ánh sáng — chúng ta làm chủ bóng tối.",
+    "taglineLight": "Chúng ta không sợ ánh sáng — chúng ta điêu khắc hình hài.",
+
+    "lookbookTitle": "Nghi thức",
+    "lookbookPrevTitle": "Tuyên ngôn",
+    "lookbookViewImages": "XEM ẢNH LOOKBOOK",
+    "lookbookRevealRelics": "HÉ LỘ DI TÍCH",
+
+    "sizingTitle": "Về kích thước",
+    "sizingPrevTitle": "Nghi thức",
+    "sizingDesc": "Sản phẩm có form dáng hộp và dáng ngắn (boxy cropped). Chọn đúng size để có dáng mặc rộng rãi (oversized), hoặc giảm 1 size để có dáng hộp hiện đại hơn. Người mẫu mặc size M.",
+    "sizingGuideLink": "Bảng đo kích thước chi tiết →",
+    "sizingTableHeaderSize": "Size",
+    "sizingTableHeaderChest": "Ngực",
+    "sizingTableHeaderLength": "Chiều dài",
+
+    "doctrineTitle": "Học thuyết",
+    "doctrinePrevTitle": "Về kích thước",
+    "faq1Q": "Sản phẩm được chế tác như thế nào?",
+    "faq1A": "Được cắt may tại Porto từ 280 gsm cotton, sau đó in lụa thủ công tại Berlin. Mỗi chiếc áo được nhuộm màu sau khi in — những nét không hoàn hảo là cố ý.",
+    "faq2Q": "Form dáng mặc như thế nào?",
+    "faq2A": "Dáng hộp rộng rãi, vai trễ (drop-shoulder). Nếu bạn ở giữa 2 size và muốn dáng hộp hiện đại, hãy giảm 1 size. Nếu muốn dáng rộng rũ truyền thống, hãy tăng 1 size.",
+    "faq3Q": "Khi nào sản phẩm được giao?",
+    "faq3A": "Đơn hàng sẽ được gửi đi trong vòng 3 ngày làm việc từ studio Berlin của chúng tôi. Giao hàng quốc tế từ 5-10 ngày làm việc qua chuyển phát nhanh có mã theo dõi.",
+    "doctrineLink": "Toàn bộ học thuyết → /faq",
+
+    "cultEyebrow": "Giáo phái — Thành viên độc quyền",
+    "cultTitle": "Gia nhập",
+    "cultTitleAccent": "Giáo phái",
+    "cultDesc": "Nhận quyền mua sớm nhất mỗi đợt mở bán. Cập nhật nghi thức mã hóa. Các dấu sigil độc quyền không bao giờ bán đại trà. Kết nạp là vĩnh viễn.",
+    "cultPlaceholder": "Nhập email của bạn",
+    "cultButton": "Kết nạp",
+    "cultSuccess": "✦  Bạn đã được kết nạp",
+    "cultDisclaimer": "Không dung thứ. Không thư rác. Hủy đăng ký để từ bỏ.",
+
+    "products": {
+      "void-hoodie": {
+        "name": "VOID HOODIE",
+        "spec": "600 GSM · nỉ loopback",
+        "desc": "Chất liệu nỉ loopback dày dặn của Nhật Bản, được nhuộm màu obsidian nguyên bản. Gấu cắt thô, mũ trùm monastic rộng và sigil được in lụa mờ màu đỏ máu rồng dọc sống lưng. Thiết kế cho những kẻ ám ảnh."
+      },
+      "ascension-parka": {
+        "name": "ASCENSION PARKA",
+        "spec": "Màng 3 lớp · chống nước",
+        "desc": "Áo parka phong cách gothic kỹ thuật với cổ mũ cowl tháo rời, đường may chống thấm ép keo toàn bộ, nắp túi hít nam châm và phụ kiện khóa oxy hóa tùy chỉnh."
+      },
+      "ritual-cloak": {
+        "name": "RITUAL CLOAK",
+        "spec": "100% merino · dệt len",
+        "desc": "Áo choàng dài dệt từ len merino siêu mịn. Gấu áo bất đối xứng ấn tượng, mũ trùm thô, lỗ xỏ ngón tay cái tích hợp và hai túi ẩn giấu bên trong."
+      },
+      "eclipse-bomber": {
+        "name": "ECLIPSE BOMBER",
+        "spec": "vỏ satin · lót đỏ máu",
+        "desc": "Kiểu dáng áo khoác phi công cổ điển được tái cấu trúc bằng vải satin obsidian công nghiệp. Thêu huy hiệu mờ mật độ cao trước ngực, viền bo dày và lớp lót bông chần màu đỏ máu."
+      },
+      "obsidian-cargo": {
+        "name": "OBSIDIAN CARGO",
+        "spec": "canvas dày · thiết kế 10 túi",
+        "desc": "Quần túi hộp vải cotton canvas dệt ba lớp gia cường. Thiết hệ thống 10 túi mô-đun, đầu gối cắt rập cử động thoải mái, quai dán cổ chân tùy chỉnh và chi tiết móc D-ring thép phong trần."
+      },
+      "slashed-longsleeve": {
+        "name": "SLASHED LONGSLEEVE",
+        "spec": "cotton rách",
+        "desc": "Áo dài tay kỹ thuật với các chi tiết cắt rách."
+      },
+      "shadow-cargo": {
+        "name": "SHADOW CARGO PANTS",
+        "spec": "canvas dày",
+        "desc": "Quần túi hộp obsidian với móc D-ring tùy chỉnh."
+      }
+    }
   }
 }

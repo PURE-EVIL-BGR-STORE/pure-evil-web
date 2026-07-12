@@ -1,10 +1,12 @@
 'use client'
 
 import React, { useRef, useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/
 
 export function CultSection(): React.ReactElement {
+  const t = useTranslations('Home')
   const [email, setEmail] = useState('')
   const [done, setDone] = useState(false)
   const formRef = useRef<HTMLFormElement>(null)
@@ -51,17 +53,16 @@ export function CultSection(): React.ReactElement {
 
       <div className="relative z-10 w-full max-w-[47.5rem] mx-auto text-center flex flex-col items-center">
         <span className="font-mono text-[10px] tracking-[0.3em] uppercase text-muted-foreground mb-4">
-          The Cult — Members Only
+          {t('cultEyebrow')}
         </span>
 
         <h2 className="font-display font-black text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-[0.95] tracking-[0.02em] text-bone uppercase mb-8">
-          Join the <br />
-          <span className="text-blood">Cult</span>
+          {t('cultTitle')} <br />
+          <span className="text-blood">{t('cultTitleAccent')}</span>
         </h2>
 
         <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-[48ch] mx-auto mb-10">
-          First access to every drop. Encrypted ritual updates. Exclusive sigils never sold to the
-          masses. Initiation is permanent.
+          {t('cultDesc')}
         </p>
 
         {!done ? (
@@ -74,7 +75,7 @@ export function CultSection(): React.ReactElement {
             <input
               ref={inputRef}
               type="email"
-              placeholder="Enter your email"
+              placeholder={t('cultPlaceholder')}
               aria-label="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -85,17 +86,17 @@ export function CultSection(): React.ReactElement {
               type="submit"
               className="bg-bone text-background px-8 py-4 text-xs font-mono uppercase tracking-[0.3em] hover:bg-blood hover:text-bone transition-colors duration-300 font-bold cursor-pointer"
             >
-              Initiate
+              {t('cultButton')}
             </button>
           </form>
         ) : (
           <p className="w-full max-w-md mx-auto text-blood font-mono text-sm uppercase tracking-[0.3em] py-4 border border-blood bg-blood/5 flex items-center justify-center gap-2">
-            ✦ &nbsp;You have been initiated
+            {t('cultSuccess')}
           </p>
         )}
 
         <p className="mt-6 font-mono text-[10px] text-muted-foreground uppercase tracking-widest opacity-80">
-          No mercy. No spam. Unsubscribe to renounce.
+          {t('cultDisclaimer')}
         </p>
       </div>
     </section>

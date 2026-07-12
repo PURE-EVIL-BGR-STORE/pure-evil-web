@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react'
 import { HeroSection } from '../components/new/HeroSection'
 import { CategorySection } from '../components/new/CategorySection'
+import { BestSellersGrid } from '../components/BestSellersGrid'
 import { ManifestoSection } from '../components/new/ManifestoSection'
 import { LookbookSection } from '../components/new/LookbookSection'
 import { SizingSection } from '../components/new/SizingSection'
@@ -26,6 +27,7 @@ export function NewHomeView(): React.ReactElement {
       <div className="w-full">
         <HeroSection />
         <CategorySection />
+        <BestSellersGrid />
         <ManifestoSection />
         <LookbookSection />
         <SizingSection />

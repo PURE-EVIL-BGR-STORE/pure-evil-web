@@ -2,9 +2,118 @@
   "Home": {
     "title": "PURE EVIL STORE",
     "description": "A store for all your evil needs.",
-    "heroTitle": "RITUAL DESTROYED HOODIE",
-    "heroSub": "600 GSM · loopback fleece",
-    "shopNow": "SHOP NOW",
-    "scroll": "Scroll"
+    "scroll": "Scroll",
+
+    "heroFeatured": "CH. I / FEATURED",
+    "heroDrop": "Drop 2026.07",
+    "heroTitleFirst": "Cast in",
+    "heroTitleSecond": "shadow.",
+    "heroButton": "Enter the ritual",
+    "heroLocation": "Berlin · Porto · Now",
+    "heroScroll": "↓ Scroll · CH. II",
+
+    "categoryTitle": "Classification",
+    "categoryPrevTitle": "Featured",
+    "categorySys": "SYS_CAT",
+    "categoryEnter": "ENTER ARCHIVE",
+    "outerwearTitle": "OUTERWEAR",
+    "outerwearSubtitle": "Technical cowls, modular shells, knit drapes",
+    "apparelTitle": "APPAREL",
+    "apparelSubtitle": "Heavyweight fleece, raw edges, spine sigils",
+    "trousersTitle": "TROUSERS",
+    "trousersSubtitle": "Triple-weave canvas, modular cargo systems",
+
+    "bestSellersEyebrow": "[ RUNNING STOCK ]",
+    "bestSellersTitle": "System Components",
+    "addToBag": "ADD TO BAG",
+    "limited": "LIMITED",
+
+    "manifestoTitle": "Manifesto",
+    "manifestoPrevTitle": "Classification",
+    "manifestoHeading1": "We are not",
+    "manifestoHeading2": "a clothing brand.",
+    "manifestoHeading3": "We are an ",
+    "manifestoHeading3Accent": "identity",
+    "manifestoHeading3End": "—",
+    "manifestoHeading4": "a manifestation of obsession,",
+    "manifestoHeading5": "discipline & aesthetic violence.",
+    "manifestoDocTitle": "The Doctrine",
+    "manifestoDocDesc": "Every garment is a ritual. Cut sharp, dyed in obsidian, marked with the sigil. Worn by those who refuse the ordinary.",
+    "manifestoMatTitle": "The Material",
+    "manifestoMatDesc": "Heavyweight Japanese fleece, raw-edge construction, oxidised hardware. Built to outlast the trends that fear it.",
+    "manifestoCodeTitle": "The Code",
+    "manifestoCodeDesc": "Discipline builds freedom. Restraint becomes power.",
+    "taglineDark": "We do not chase the light — we master the dark.",
+    "taglineLight": "We do not fear the light — we sculpt the form.",
+
+    "lookbookTitle": "The Ritual",
+    "lookbookPrevTitle": "Manifesto",
+    "lookbookViewImages": "VIEW IMAGES",
+    "lookbookRevealRelics": "REVEAL RELICS",
+
+    "sizingTitle": "On Sizing",
+    "sizingPrevTitle": "The Ritual",
+    "sizingDesc": "The Relic runs boxy and cropped. Order true to size for the oversized fit, or size down for a modern boxy cut. Model wears M.",
+    "sizingGuideLink": "Full size guide →",
+    "sizingTableHeaderSize": "Size",
+    "sizingTableHeaderChest": "Chest",
+    "sizingTableHeaderLength": "Length",
+
+    "doctrineTitle": "Doctrine",
+    "doctrinePrevTitle": "On Sizing",
+    "faq1Q": "How is it made?",
+    "faq1A": "Cut and sewn in Porto from 280 gsm cotton, then hand screen-printed in Berlin. Each tee is garment-dyed after printing — imperfections are intentional.",
+    "faq2Q": "How does it fit?",
+    "faq2A": "Boxy, oversized, drop-shoulder. If you're between sizes and want a modern boxy fit, size down. For a true oversized drape, size up.",
+    "faq3Q": "When does it ship?",
+    "faq3A": "Orders ship within 3 business days from our Berlin studio. International delivery in 5–10 business days via tracked courier.",
+    "doctrineLink": "All doctrine → /faq",
+
+    "cultEyebrow": "The Cult — Members Only",
+    "cultTitle": "Join the",
+    "cultTitleAccent": "Cult",
+    "cultDesc": "First access to every drop. Encrypted ritual updates. Exclusive sigils never sold to the masses. Initiation is permanent.",
+    "cultPlaceholder": "Enter your email",
+    "cultButton": "Initiate",
+    "cultSuccess": "✦  You have been initiated",
+    "cultDisclaimer": "No mercy. No spam. Unsubscribe to renounce.",
+
+    "products": {
+      "void-hoodie": {
+        "name": "VOID HOODIE",
+        "spec": "600 GSM · loopback fleece",
+        "desc": "Heavyweight Japanese loopback fleece, garment-dyed in true obsidian. Raw-cut hem, oversized monastic hood, and the sigil screen-printed in matte oxblood across the spine. Cut for ritual, built for the obsessed."
+      },
+      "ascension-parka": {
+        "name": "ASCENSION PARKA",
+        "spec": "3-layer membrane · waterproof",
+        "desc": "Technical gothic parka with modular high-neck cowl, fully taped seams, magnetic pocket flaps, and oxidised custom hardware."
+      },
+      "ritual-cloak": {
+        "name": "RITUAL CLOAK",
+        "spec": "100% merino · knit drape",
+        "desc": "Knitted long cloak in superfine merino wool. Dramatic asymmetric hem, raw-edge cowl hood, integrated thumbholes, and dual concealed internal drop pockets."
+      },
+      "eclipse-bomber": {
+        "name": "ECLIPSE BOMBER",
+        "spec": "satin shell · blood-red lining",
+        "desc": "Classic flight silhouette reworked in industrial obsidian satin. Features high-density matte crest chest embroidery, heavy rib trim, and blood-red quilted lining."
+      },
+      "obsidian-cargo": {
+        "name": "OBSIDIAN CARGO",
+        "spec": "heavy canvas · 10-pocket design",
+        "desc": "Reinforced triple-weave cotton canvas cargo trousers. Features 10-pocket modular system, articulated knees, adjustable ankle straps, and distressed steel D-ring details."
+      },
+      "slashed-longsleeve": {
+        "name": "SLASHED LONGSLEEVE",
+        "spec": "distressed cotton",
+        "desc": "Technical long sleeve shirt with slashed detailing."
+      },
+      "shadow-cargo": {
+        "name": "SHADOW CARGO PANTS",
+        "spec": "heavy canvas",
+        "desc": "Obsidian cargo pants with custom D-rings."
+      }
+    }
   }
 }

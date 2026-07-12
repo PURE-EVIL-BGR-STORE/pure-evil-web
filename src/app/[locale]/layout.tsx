@@ -7,6 +7,8 @@ import { routing } from "@/i18n/routing";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import "../globals.css";
+import Script from "next/script";
+
 
 const cinzel = Cinzel({
   variable: "--font-cinzel",
@@ -55,10 +57,12 @@ export default async function RootLayout({
       data-scroll-behavior="smooth"
       suppressHydrationWarning
     >
-      {/* configuration for dev local */}
-      <head>
+      <head />
+      <body className="min-h-full flex flex-col bg-background" suppressHydrationWarning>
         {process.env.NODE_ENV === "development" && (
-          <script
+          <Script
+            id="suppress-hydration-errors"
+            strategy="beforeInteractive"
             dangerouslySetInnerHTML={{
               __html: `
                 (function() {
@@ -69,7 +73,8 @@ export default async function RootLayout({
                       msg.includes('bis_skin_checked') ||
                       msg.includes('hydration-mismatch') ||
                       msg.includes('Hydration failed') ||
-                      msg.includes('did not match')
+                      msg.includes('did not match') ||
+                      msg.includes('Encountered a script tag')
                     )) {
                       return;
                     }
@@ -80,8 +85,6 @@ export default async function RootLayout({
             }}
           />
         )}
-      </head>
-      <body className="min-h-full flex flex-col bg-background" suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
             <CartProvider>

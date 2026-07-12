@@ -1,15 +1,29 @@
 'use client'
 
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Chapter } from '@/components/Chapter'
+import { useTheme } from 'next-themes'
+import { useTranslations } from 'next-intl'
 
 export function ManifestoSection(): React.ReactElement {
+  const { resolvedTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  const t = useTranslations('Home')
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const tagline = !mounted || resolvedTheme === 'dark'
+    ? t('taglineDark')
+    : t('taglineLight')
+
   return (
     <Chapter
       id="manifesto"
-      number="III"
-      title="Manifesto"
-      prev={{ id: 'classification', number: 'II', title: 'Classification' }}
+      number="IV"
+      title={t('manifestoTitle')}
+      prev={{ id: 'system-components', number: 'III', title: t('bestSellersTitle') }}
       className="bg-background overflow-hidden relative"
     >
       {/* Background Sigil */}
@@ -23,42 +37,39 @@ export function ManifestoSection(): React.ReactElement {
       <div className="relative z-10">
         <div className="max-w-[clamp(21.25rem,66vw,58.75rem)]">
           <p className="font-display font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-[1.08] tracking-wide text-bone uppercase mb-2">
-            We are not
+            {t('manifestoHeading1')}
           </p>
           <p className="font-display font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-[1.08] tracking-wide text-bone uppercase mb-2">
-            a clothing brand.
+            {t('manifestoHeading2')}
           </p>
           <p className="font-display font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-[1.08] tracking-wide text-muted-foreground/40 uppercase mb-2">
-            We are an <span className="text-blood">identity</span>—
+            {t('manifestoHeading3')}<span className="text-blood">{t('manifestoHeading3Accent')}</span>{t('manifestoHeading3End')}
           </p>
           <p className="font-display font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-[1.08] tracking-wide text-muted-foreground/40 uppercase mb-2">
-            a manifestation of obsession,
+            {t('manifestoHeading4')}
           </p>
           <p className="font-display font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-[1.08] tracking-wide text-muted-foreground/40 uppercase mb-6">
-            discipline &amp; aesthetic violence.
+            {t('manifestoHeading5')}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mt-10 pt-8 border-t border-border">
           <div>
-            <h4 className="font-mono text-xs uppercase tracking-[0.24em] text-bone mb-4 font-bold">The Doctrine</h4>
+            <h4 className="font-mono text-xs uppercase tracking-[0.24em] text-bone mb-4 font-bold">{t('manifestoDocTitle')}</h4>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">
-              Every garment is a ritual. Cut sharp, dyed in obsidian, marked with the sigil. Worn by
-              those who refuse the ordinary.
+              {t('manifestoDocDesc')}
             </p>
           </div>
           <div>
-            <h4 className="font-mono text-xs uppercase tracking-[0.24em] text-bone mb-4 font-bold">The Material</h4>
+            <h4 className="font-mono text-xs uppercase tracking-[0.24em] text-bone mb-4 font-bold">{t('manifestoMatTitle')}</h4>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">
-              Heavyweight Japanese fleece, raw-edge construction, oxidised hardware. Built to outlast
-              the trends that fear it.
+              {t('manifestoMatDesc')}
             </p>
           </div>
           <div>
-            <h4 className="font-mono text-xs uppercase tracking-[0.24em] text-bone mb-4 font-bold">The Code</h4>
+            <h4 className="font-mono text-xs uppercase tracking-[0.24em] text-bone mb-4 font-bold">{t('manifestoCodeTitle')}</h4>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-sm">
-              Discipline builds freedom. Restraint becomes power. We do not chase the light — we
-              master the dark.
+              {t('manifestoCodeDesc')} {tagline}
             </p>
           </div>
         </div>
