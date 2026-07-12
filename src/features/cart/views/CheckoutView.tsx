@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { Link, useRouter } from '@/i18n/routing'
 import { useCart } from '@/features/cart/context/CartContext'
 import { ShoppingBag, ArrowLeft, ShieldAlert, Check } from 'lucide-react'
+import { Button } from '@/components/ui/button/button'
 
 export function CheckoutView(): React.ReactElement {
   const { cart, clearCart } = useCart()
@@ -61,18 +62,17 @@ export function CheckoutView(): React.ReactElement {
         <p className="text-xs text-faint tracking-widest max-w-md leading-relaxed uppercase mb-8">
           YOUR TRANSACTIONS HAVE BEEN SEALED. AN ORACLE EMAIL WILL REACH YOU SHORTLY WITH SHIPMENT RITUAL DETAILS.
         </p>
-        <Link
-          href="/collection"
-          className="px-8 py-3 bg-red hover:bg-red-bright text-white text-xs font-bold tracking-[0.2em] transition-all duration-300 uppercase [box-shadow:0_0_20px_rgba(197,20,27,0.2)]"
-        >
-          CONTINUE TO ARCHIVES
-        </Link>
+        <Button asChild variant="ritual" size="ritual">
+          <Link href="/collection">
+            CONTINUE TO ARCHIVES
+          </Link>
+        </Button>
       </div>
     )
   }
 
   return (
-    <div className="w-full max-w-[1480px] mx-auto py-12 font-mono">
+    <div className="w-full max-w-[1480px] mx-auto pt-0 pb-12 font-mono">
       {/* Return link */}
       <div className="mb-8">
         <Link href="/collection" className="inline-flex items-center gap-2 text-xs text-faint hover:text-fg transition-colors duration-300 uppercase tracking-widest">
@@ -228,10 +228,12 @@ export function CheckoutView(): React.ReactElement {
             </div>
 
             {/* Confirm button */}
-            <button
+            <Button
               type="submit"
               disabled={loading}
-              className="w-full py-4 bg-red hover:bg-red-bright text-white text-center text-xs font-bold tracking-[0.25em] transition-all duration-300 uppercase [box-shadow:0_0_20px_rgba(197,20,27,0.15)] hover:[box-shadow:0_0_30px_rgba(255,26,26,0.35)] cursor-pointer flex items-center justify-center"
+              variant="ritual"
+              size="ritual"
+              className="w-full"
             >
               {loading ? (
                 <div className="flex items-center gap-2">
@@ -241,7 +243,7 @@ export function CheckoutView(): React.ReactElement {
               ) : (
                 <span>CONFIRM INITIATION — ${(cart.totalAmount + 15).toFixed(2)}</span>
               )}
-            </button>
+            </Button>
           </form>
 
           {/* Checkout Order Summary Panel */}

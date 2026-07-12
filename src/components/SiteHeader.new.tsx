@@ -129,7 +129,8 @@ export function SiteHeaderNew(): React.ReactElement {
             )}
 
             {/* Cart button */}
-            <button
+            <Link
+              href="/cart"
               className="flex items-center gap-2 label hover:text-bone transition-colors"
               aria-label="Open cart"
             >
@@ -137,7 +138,7 @@ export function SiteHeaderNew(): React.ReactElement {
               <span className="inline-flex h-5 min-w-5 items-center justify-center border border-blood text-blood text-[10px] font-mono px-1">
                 {String(cart.totalQuantity).padStart(2, '0')}
               </span>
-            </button>
+            </Link>
 
             {/* Settings Menu */}
             <SettingsMenu />

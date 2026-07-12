@@ -31,12 +31,25 @@ export default getRequestConfig(async ({ requestLocale }) => {
   }
 
   try {
-    if (normalizedPath === '/') {
+    if (normalizedPath === '/' || normalizedPath === '') {
       featureMessages = (await import(`../features/home/messages/${locale}.json`)).default
     } else if (normalizedPath.startsWith('/collection')) {
-      featureMessages = (await import(`../features/products/messages/${locale}.json`)).default
+      const prodMsgs = (await import(`../features/products/messages/${locale}.json`)).default
+      const homeMsgs = (await import(`../features/home/messages/${locale}.json`)).default
+      featureMessages = {
+        ...prodMsgs,
+        ...homeMsgs
+      }
     } else if (normalizedPath.startsWith('/login') || normalizedPath.startsWith('/register')) {
       featureMessages = (await import(`../features/auth/messages/${locale}.json`)).default
+    } else if (normalizedPath.startsWith('/cart') || normalizedPath.startsWith('/checkout')) {
+      featureMessages = (await import(`../features/home/messages/${locale}.json`)).default
+    }
+
+    // Fallback: if no feature messages were loaded (e.g. x-pathname header missing
+    // during client-side navigation), always include Home messages as a safety net
+    if (Object.keys(featureMessages).length === 0) {
+      featureMessages = (await import(`../features/home/messages/${locale}.json`)).default
     }
   } catch (error) {
     console.error(`Failed to load messages for pathname: ${pathname} (${normalizedPath}), locale: ${locale}`, error)
