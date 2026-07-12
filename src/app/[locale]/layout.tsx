@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cinzel, Inter, JetBrains_Mono } from "next/font/google";
+import { Cinzel, Inter, JetBrains_Mono } from 'next/font/google'
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
@@ -23,6 +23,7 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["300", "400", "500"],
 });
+
 
 export const metadata: Metadata = {
   title: "PURE EVIL STORE",

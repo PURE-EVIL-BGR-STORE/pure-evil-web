@@ -362,7 +362,7 @@ export function AuthContainer({ initialIsLogin }: AuthContainerProps): React.Rea
       {/* DESKTOP: Two-column form area */}
       <div className="hidden md:flex w-full h-full z-10 relative">
         {/* LEFT COLUMN: REGISTER FORM */}
-        <div className="w-1/2 h-full flex flex-col justify-center items-center bg-[#050505] overflow-y-auto py-16 px-6 sm:px-12 lg:px-20 border-r border-fg/5 relative z-10">
+        <div className="w-1/2 h-full flex flex-col justify-start items-center bg-[#050505] overflow-y-auto pt-24 pb-16 px-6 sm:px-12 lg:px-20 border-r border-fg/5 relative z-10">
           <Link href="/" className="absolute top-8 left-8 sm:left-12 flex items-center gap-2 text-faint hover:text-fg text-xs font-mono tracking-widest uppercase transition-colors duration-300">
             <span className="text-red">←</span> BACK
           </Link>
@@ -393,7 +393,7 @@ export function AuthContainer({ initialIsLogin }: AuthContainerProps): React.Rea
             <form onSubmit={onRegisterSubmit} noValidate className="flex flex-col gap-5">
               <div className="grid grid-cols-2 gap-4">
                 <div className="flex flex-col gap-1.5">
-                  <Label className="text-[10px] font-mono tracking-widest text-muted uppercase" htmlFor="firstName">
+                  <Label className="text-[10px] font-mono tracking-widest text-muted-foreground/75 uppercase" htmlFor="firstName">
                     First Name
                   </Label>
                   <Input
@@ -411,7 +411,7 @@ export function AuthContainer({ initialIsLogin }: AuthContainerProps): React.Rea
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <Label className="text-[10px] font-mono tracking-widest text-muted uppercase" htmlFor="lastName">
+                  <Label className="text-[10px] font-mono tracking-widest text-muted-foreground/75 uppercase" htmlFor="lastName">
                     Last Name
                   </Label>
                   <Input
@@ -430,7 +430,7 @@ export function AuthContainer({ initialIsLogin }: AuthContainerProps): React.Rea
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <Label className="text-[10px] font-mono tracking-widest text-muted uppercase" htmlFor="username">
+                <Label className="text-[10px] font-mono tracking-widest text-muted-foreground/75 uppercase" htmlFor="username">
                   Username
                 </Label>
                 <Input
@@ -448,7 +448,7 @@ export function AuthContainer({ initialIsLogin }: AuthContainerProps): React.Rea
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <Label className="text-[10px] font-mono tracking-widest text-muted uppercase" htmlFor="email">
+                <Label className="text-[10px] font-mono tracking-widest text-muted-foreground/75 uppercase" htmlFor="email">
                   Email Address
                 </Label>
                 <Input
@@ -466,7 +466,7 @@ export function AuthContainer({ initialIsLogin }: AuthContainerProps): React.Rea
               </div>
 
               <div className="flex flex-col gap-1.5">
-                <Label className="text-[10px] font-mono tracking-widest text-muted uppercase" htmlFor="register-password">
+                <Label className="text-[10px] font-mono tracking-widest text-muted-foreground/75 uppercase" htmlFor="register-password">
                   Passcode
                 </Label>
                 <div className="relative">
@@ -509,7 +509,7 @@ export function AuthContainer({ initialIsLogin }: AuthContainerProps): React.Rea
 
               {/* Confirm Password */}
               <div className="flex flex-col gap-1.5">
-                <Label className="text-[10px] font-mono tracking-widest text-muted uppercase" htmlFor="register-confirm-password">
+                <Label className="text-[10px] font-mono tracking-widest text-muted-foreground/75 uppercase" htmlFor="register-confirm-password">
                   Confirm Passcode
                 </Label>
                 <div className="relative">
@@ -547,9 +547,14 @@ export function AuthContainer({ initialIsLogin }: AuthContainerProps): React.Rea
                   className={`mt-1 border-fg/15 data-[state=checked]:bg-red data-[state=checked]:border-red rounded-none w-4 h-4 cursor-pointer ${registerTermsError ? 'border-red' : ''
                     }`}
                 />
-                <Label htmlFor="terms" className={`text-[10px] font-mono tracking-wide leading-relaxed uppercase select-none cursor-pointer ${registerTermsError ? 'text-red' : 'text-muted hover:text-fg'}`}>
+                <label
+                  htmlFor="terms"
+                  className={`text-[10px] font-mono tracking-wide leading-relaxed uppercase select-none cursor-pointer ${
+                    registerTermsError ? 'text-red' : 'text-faint hover:text-bone transition-colors'
+                  }`}
+                >
                   I accept the <a href="#" className="underline text-red hover:text-white">terms of initiation</a> and confirm my devotion.
-                </Label>
+                </label>
               </div>
 
               <Button
@@ -697,7 +702,7 @@ export function AuthContainer({ initialIsLogin }: AuthContainerProps): React.Rea
 
             <form onSubmit={onLoginSubmit} noValidate className="flex flex-col gap-6">
               <div className="flex flex-col gap-1.5">
-                <Label className="text-[10px] font-mono tracking-widest text-muted uppercase" htmlFor="identifier">
+                <Label className="text-[10px] font-mono tracking-widest text-muted-foreground/75 uppercase" htmlFor="identifier">
                   Identity
                 </Label>
                 <Input
@@ -717,7 +722,7 @@ export function AuthContainer({ initialIsLogin }: AuthContainerProps): React.Rea
 
               <div className="flex flex-col gap-1.5">
                 <div className="flex justify-between items-baseline">
-                  <Label className="text-[10px] font-mono tracking-widest text-muted uppercase" htmlFor="login-password">
+                  <Label className="text-[10px] font-mono tracking-widest text-muted-foreground/75 uppercase" htmlFor="login-password">
                     Passcode
                   </Label>
                   <a href="#" className="text-[9px] font-mono tracking-widest text-red hover:underline uppercase">
@@ -827,7 +832,7 @@ function MobileLoginForm({
   return (
     <form onSubmit={onLoginSubmit} noValidate className="flex flex-col gap-5">
       <div className="flex flex-col gap-1.5">
-        <Label className="text-[10px] font-mono tracking-widest text-muted uppercase" htmlFor="m-identifier">Identity</Label>
+        <Label className="text-[10px] font-mono tracking-widest text-muted-foreground/75 uppercase" htmlFor="m-identifier">Identity</Label>
         <Input
           className={`w-full bg-[#0a0a0a] border text-fg font-mono text-xs tracking-widest py-5 px-4 focus:outline-none rounded-none uppercase placeholder:text-faint/30 transition-all ${
             loginErrors.identifier ? 'border-red/60 focus-visible:border-red' : 'border-fg/10 focus-visible:border-red/40'
@@ -840,7 +845,7 @@ function MobileLoginForm({
 
       <div className="flex flex-col gap-1.5">
         <div className="flex justify-between items-baseline">
-          <Label className="text-[10px] font-mono tracking-widest text-muted uppercase" htmlFor="m-login-pw">Passcode</Label>
+          <Label className="text-[10px] font-mono tracking-widest text-muted-foreground/75 uppercase" htmlFor="m-login-pw">Passcode</Label>
           <a href="#" className="text-[9px] font-mono tracking-widest text-red hover:underline uppercase">Forgotten?</a>
         </div>
         <div className="relative">
@@ -912,13 +917,13 @@ function MobileRegisterForm({
     <form onSubmit={onRegisterSubmit} noValidate className="flex flex-col gap-4 pb-8">
       <div className="grid grid-cols-2 gap-3">
         <div className="flex flex-col gap-1.5">
-          <Label className="text-[10px] font-mono tracking-widest text-muted uppercase" htmlFor="m-firstName">First Name</Label>
+          <Label className="text-[10px] font-mono tracking-widest text-muted-foreground/75 uppercase" htmlFor="m-firstName">First Name</Label>
           <Input className={inputCls(registerErrors.firstName)} id="m-firstName" type="text" placeholder="John"
             value={registerForm.firstName} onChange={setRegisterField('firstName')} />
           {registerErrors.firstName && <span className="text-[9px] font-mono text-red uppercase tracking-widest">{registerErrors.firstName}</span>}
         </div>
         <div className="flex flex-col gap-1.5">
-          <Label className="text-[10px] font-mono tracking-widest text-muted uppercase" htmlFor="m-lastName">Last Name</Label>
+          <Label className="text-[10px] font-mono tracking-widest text-muted-foreground/75 uppercase" htmlFor="m-lastName">Last Name</Label>
           <Input className={inputCls(registerErrors.lastName)} id="m-lastName" type="text" placeholder="Doe"
             value={registerForm.lastName} onChange={setRegisterField('lastName')} />
           {registerErrors.lastName && <span className="text-[9px] font-mono text-red uppercase tracking-widest">{registerErrors.lastName}</span>}
@@ -926,21 +931,21 @@ function MobileRegisterForm({
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <Label className="text-[10px] font-mono tracking-widest text-muted uppercase" htmlFor="m-username">Username</Label>
+        <Label className="text-[10px] font-mono tracking-widest text-muted-foreground/75 uppercase" htmlFor="m-username">Username</Label>
         <Input className={inputCls(registerErrors.username)} id="m-username" type="text" placeholder="Your handle"
           value={registerForm.username} onChange={setRegisterField('username')} />
         {registerErrors.username && <span className="text-[9px] font-mono text-red uppercase tracking-widest">{registerErrors.username}</span>}
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <Label className="text-[10px] font-mono tracking-widest text-muted uppercase" htmlFor="m-email">Email Address</Label>
+        <Label className="text-[10px] font-mono tracking-widest text-muted-foreground/75 uppercase" htmlFor="m-email">Email Address</Label>
         <Input className={inputCls(registerErrors.email)} id="m-email" type="email" placeholder="your@email.com"
           value={registerForm.email} onChange={setRegisterField('email')} />
         {registerErrors.email && <span className="text-[9px] font-mono text-red uppercase tracking-widest">{registerErrors.email}</span>}
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <Label className="text-[10px] font-mono tracking-widest text-muted uppercase" htmlFor="m-password">Passcode</Label>
+        <Label className="text-[10px] font-mono tracking-widest text-muted-foreground/75 uppercase" htmlFor="m-password">Passcode</Label>
         <div className="relative">
           <Input className={inputCls(registerErrors.password) + ' pr-12'} id="m-password"
             type={showRegisterPw ? 'text' : 'password'} placeholder="Create passcode"
@@ -963,7 +968,7 @@ function MobileRegisterForm({
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <Label className="text-[10px] font-mono tracking-widest text-muted uppercase" htmlFor="m-confirm-pw">Confirm Passcode</Label>
+        <Label className="text-[10px] font-mono tracking-widest text-muted-foreground/75 uppercase" htmlFor="m-confirm-pw">Confirm Passcode</Label>
         <div className="relative">
           <Input className={inputCls(registerErrors.confirmPassword) + ' pr-12'} id="m-confirm-pw"
             type={showConfirmPw ? 'text' : 'password'} placeholder="Repeat passcode"
@@ -981,9 +986,14 @@ function MobileRegisterForm({
           onCheckedChange={(checked) => { setRegisterTerms(!!checked); if (checked) setRegisterTermsError(false) }}
           className={`mt-1 border-fg/15 data-[state=checked]:bg-red data-[state=checked]:border-red rounded-none cursor-pointer ${registerTermsError ? 'border-red' : ''}`}
         />
-        <Label htmlFor="m-terms" className={`text-[10px] font-mono tracking-wide leading-relaxed uppercase select-none cursor-pointer ${registerTermsError ? 'text-red' : 'text-muted'}`}>
+        <label
+          htmlFor="m-terms"
+          className={`text-[10px] font-mono tracking-wide leading-relaxed uppercase select-none cursor-pointer ${
+            registerTermsError ? 'text-red' : 'text-faint hover:text-bone transition-colors'
+          }`}
+        >
           I accept the <a href="#" className="underline text-red hover:text-white">terms of initiation</a> and confirm my devotion.
-        </Label>
+        </label>
       </div>
 
       <Button variant="ritual" size="ritual" className="w-full mt-2" type="submit" disabled={registerStatus === 'submitting'}>

@@ -1,6 +1,6 @@
 import React from 'react'
-import { SiteNav } from '@/components/SiteNav'
-import { SiteFooter } from '@/components/SiteFooter'
+import { SiteHeaderNew } from '@/components/SiteHeader.new'
+import { SiteFooterNew } from '@/components/SiteFooter.new'
 
 interface ShopLayoutProps {
   children: React.ReactNode
@@ -8,10 +8,10 @@ interface ShopLayoutProps {
 
 export default function ShopLayout({ children }: ShopLayoutProps) {
   return (
-    <>
-      <SiteNav />
-      {children}
-      <SiteFooter />
-    </>
+    <div className="min-h-screen flex flex-col bg-background">
+      <SiteHeaderNew />
+      <main className="flex-1">{children}</main>
+      <SiteFooterNew />
+    </div>
   )
 }

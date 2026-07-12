@@ -907,6 +907,12 @@
   aspect-ratio: 16/13;
   display: block;
   cursor: pointer;
+  transition: outline 0.4s var(--ease);
+}
+
+.col-card:hover {
+  outline: 3px double rgba(197, 20, 27, 0.25);
+  outline-offset: -6px;
 }
 
 .col-card__media {

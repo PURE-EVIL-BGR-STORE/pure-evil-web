@@ -1,9 +1,11 @@
 const PHRASES = [
-  "Controlled Insanity",
-  "Aesthetic Violence",
-  "Est. MMXXV",
+  "Elysian Fields",
+  "Tartarus Systems",
+  "Underworld Doctrine",
   "Obsession Is A Gift",
-  "Discipline Builds Freedom",
+  "Pride And Punishment",
+  "Mortal Soil",
+  "Est. MMXXV",
 ];
 
 export function Ticker() {

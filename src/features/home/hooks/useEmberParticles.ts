@@ -21,10 +21,8 @@ const EMBER_COLORS = [
   '#c5141b',  // blood red
   '#d4201f',  // crimson
   '#ff1a1a',  // bright red
-  '#e8391e',  // fire red
-  '#ff4422',  // ember orange-red
-  '#ff6b35',  // ember orange
-  '#ff8844',  // warm ember
+  '#800000',  // maroon / deep red
+  '#4a0408',  // dark obsidian red
 ]
 
 function randomBetween(min: number, max: number): number {

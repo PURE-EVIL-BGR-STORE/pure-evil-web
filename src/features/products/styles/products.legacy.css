@@ -1,0 +1,540 @@
+:root {
+    --bg-card-shell: #141619;
+    /* LAYER 1: Vỏ nền tối sẫm dưới cùng */
+    --bg-fluid-plate: #22262c;
+    /* LAYER 2: Khối giáp xám nhạt làm nền hiển thị */
+    --accent-red: #e61c1c;
+    /* Đỏ neon Cyberpunk */
+    --text-light: #ffffff;
+    --text-muted: #7d838d;
+    --border-inverted-radius: 24px;
+    /* Độ cong khớp nối ngược tối ưu thị giác */
+    --sidebar-width: 72px;
+}
+
+.screen-container {
+    border: 1px solid #1a2421;
+    padding: 40px;
+    position: relative;
+}
+
+/* --- CARD CỨNG KHUNG CHỈ ĐỊNH KÍCH THƯỚC --- */
+.card {
+    width: 380px;
+    height: 640px;
+    background: var(--bg-card-shell);
+    border-radius: 45px;
+    position: relative;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+    overflow: visible;
+}
+
+/* --- 1 FLUID-BLOCK DUY NHẤT BỌC TRONG CARD --- */
+.card>.fluid-block {
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- QUY TẮC CORE: NỀN FLUID XÁM MẶC ĐỊNH --- */
+.fluid-block .fluid-dock {
+    background-color: var(--bg-fluid-plate);
+    border-radius: 24px;
+    position: relative;
+    transition: border-radius 0.3s ease, background-color 0.3s ease;
+}
+
+/* ====================================================================
+   HỆ THỐNG PHÂN PHỐI GÓC BO NGƯỢC ĐỘNG TOÀN DIỆN
+   FIX: chuyển display none/block -> opacity để có thể transition
+   (trượt mượt) top/left/right/bottom mà không bị "nhảy" vị trí.
+==================================================================== */
+.fluid-dock .fillet {
+    position: absolute;
+    width: var(--border-inverted-radius);
+    height: var(--border-inverted-radius);
+    background-color: var(--bg-fluid-plate);
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    left: 0;
+    top: 0;
+    transform: scale(0.4);
+    transform-origin: center;
+    /* CHỈ dùng left/top (bỏ right/bottom) và luôn set giá trị số cụ thể
+       (không bao giờ 'auto') để transition có thể nội suy mượt -> trượt thật.
+       transform/scale là lớp animation dự phòng đảm bảo luôn "động" ngay cả
+       khi left/top của 2 trạng thái tình cờ trùng nhau. */
+    transition: left 0.3s ease, top 0.3s ease, opacity 0.25s ease, transform 0.3s ease, background-color 0.3s ease;
+    will-change: left, top, opacity, transform;
+}
+
+/* Tự động bắt màu fillet theo khối cha nếu khối đó là Tab đỏ hoạt động */
+.tab.active .fillet {
+    background-color: var(--accent-red);
+}
+
+/* ==================== LAYER UI NỔI TRÊN NỀN ==================== */
+.card-content-wrapper {
+    position: relative;
+    z-index: 10;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: auto;
+}
+
+.main-title {
+    font-family: var(--serif), serif;
+    color: var(--accent-red);
+    font-size: 28px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+}
+
+.location-box {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+}
+
+.location-box svg {
+    fill: var(--text-muted);
+}
+
+.location-text {
+    color: var(--text-muted);
+    font-size: 11px;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+.tabs-container {
+    display: flex;
+    gap: 10px;
+    pointer-events: auto;
+    padding: 4%;
+}
+
+.tab {
+    flex: 1;
+    padding: 10px 0px;
+    text-align: center;
+    border-radius: 20px;
+    border: none;
+    font-size: 11px;
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    background: #282c34;
+    position: relative;
+    /* FIX: transition nằm ở base rule (không phụ thuộc .fluid-dock) để animate
+       được cả 2 chiều: lúc ĐƯỢC gắn fluid-dock lẫn lúc BỊ gỡ khỏi fluid-dock. */
+    transition: background 0.3s, color 0.3s, border-radius 0.3s ease;
+}
+
+.tab.active {
+    background: var(--accent-red);
+}
+
+/* KHUNG NỘI DUNG CHÍNH */
+.main-content {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) 1fr;
+    grid-template-rows: 1fr auto;
+    flex: 1;
+}
+
+.left-menu-sidebar {
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 5;
+    pointer-events: auto;
+}
+
+.menu-item {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    /* FIX: transition base rule, không phụ thuộc .fluid-dock, để animate cả
+       2 chiều thêm/gỡ class (giống lý do sửa ở .tab). */
+    transition: border-radius 0.3s ease, background-color 0.3s ease;
+}
+
+.menu-item.item-colors {
+    height: 54px;
+    position: relative;
+    /* FIX: thiếu transition cho height là nguyên nhân chính gây "nhảy" -
+       cả khối đổi kích thước tức thì, che mất mọi hiệu ứng fillet mượt. */
+    transition: height 0.3s ease;
+}
+
+.menu-item.item-colors.fluid-dock {
+    height: 120px;
+}
+
+/* FIX TOÀN BỘ: color-dot giờ LUÔN dùng position:absolute ở cả 2 trạng thái
+   (trước đây đổi giữa absolute <-> static, mà CSS không transition được
+   khi đổi 'position' - đây là lỗi y hệt việc dùng 'auto' cho top/left).
+   Giờ chỉ đổi top/left/width/height cụ thể -> transition (đã có sẵn
+   "transition: all 0.4s ease") nội suy mượt thật sự. */
+.color-dot {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    transition: all 0.4s ease;
+}
+
+.color-dot.red {
+    background: #b80000;
+}
+
+.color-dot.black {
+    background: #000000;
+    border: 1px solid #333;
+}
+
+.color-dot.white {
+    background: #ffffff;
+}
+
+/* Trạng thái mở rộng (fluid-dock): 3 chấm dàn dọc, cách đều, giữa 120px */
+.menu-item.item-colors.fluid-dock .color-dot.red {
+    top: 27px;
+    z-index: 1;
+}
+
+.menu-item.item-colors.fluid-dock .color-dot.black {
+    top: 53px;
+    z-index: 1;
+}
+
+.menu-item.item-colors.fluid-dock .color-dot.white {
+    top: 79px;
+    z-index: 1;
+}
+
+/* Trạng thái thu gọn (không active): cụm 3 chấm chồng lên nhau như icon gốc */
+.menu-item.item-colors:not(.fluid-dock) .color-dot {
+    width: 12px;
+    height: 12px;
+}
+
+.menu-item.item-colors:not(.fluid-dock) .color-dot.red {
+    top: 17px;
+    z-index: 3;
+}
+
+.menu-item.item-colors:not(.fluid-dock) .color-dot.black {
+    top: 26px;
+    left: calc(50% - 4px);
+    z-index: 2;
+}
+
+.menu-item.item-colors:not(.fluid-dock) .color-dot.white {
+    top: 26px;
+    left: calc(50% + 4px);
+    z-index: 1;
+}
+
+.menu-item.item-icon {
+    height: 54px;
+}
+
+.menu-item.item-icon svg {
+    fill: #ffffff;
+    transition: fill 0.3s;
+}
+
+.menu-item.item-icon.fluid-dock svg {
+    fill: var(--bg-card-shell);
+}
+
+.display-panel {
+    grid-column: 2;
+    grid-row: 1;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    display: flex;
+}
+
+.card-footer {
+    grid-column: 1 / 3;
+    grid-row: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    pointer-events: auto;
+    padding: 20px 20px 10px 20px;
+    z-index: 4;
+}
+
+.stock-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stock-label {
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.stock-count-wrapper {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.stock-number {
+    color: #ffffff;
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.stock-unit {
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.fab-button {
+    width: fit-content;
+    border-radius: 25px;
+    background: #ffffff;
+    padding: 5px 10px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    color: var(--accent-red);
+    font-family: var(--serif), serif;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.fab-icon {
+    color: var(--accent-red);
+    font-family: var(--serif), serif;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* LAYER 3: MOCKUP CHẠY RIÊNG */
+.product-container-3d {
+    position: relative;
+    z-index: 20;
+    object-fit: fill;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.product-mockup-img {
+    width: 120%;
+    object-fit: contain;
+    filter: drop-shadow(-25px 25px 35px rgba(0, 0, 0, 0.6));
+    display: block;
+}
+
+/* ====================================================================
+   PRODUCT DETAIL VIEW REDESIGN (TO MATCH CYBERPUNK FLUID CARD)
+==================================================================== */
+
+/* Ambient back-glow behind the card */
+.card-outer-wrapper {
+  position: relative;
+}
+.card-outer-wrapper::before {
+  content: "";
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(230, 28, 28, 0.08) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Redesign product meta container */
+.drop__meta {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+  align-items: flex-start;
+}
+
+/* Category & spec eyebrow */
+.drop__eyebrow {
+  font-family: var(--mono) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.3em !important;
+  color: var(--accent-red) !important;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.drop__eyebrow::before {
+  background: var(--accent-red) !important;
+}
+
+/* Product title */
+.drop__name {
+  font-family: var(--serif), serif !important;
+  color: #ffffff !important;
+  font-size: clamp(2rem, 4vw, 3.5rem) !important;
+  font-weight: 500;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: 15px;
+}
+
+/* Price */
+.drop__price {
+  font-family: var(--serif), serif !important;
+  font-size: 24px !important;
+  font-weight: 500 !important;
+  color: #ffffff !important;
+  letter-spacing: 0.1em !important;
+  margin-top: 10px !important;
+  margin-bottom: 20px;
+}
+.drop__price s {
+  color: var(--text-muted) !important;
+  margin-right: 15px !important;
+  opacity: 0.6;
+}
+
+/* Product description */
+.drop__desc {
+  font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif !important;
+  color: var(--text-muted) !important;
+  font-size: 14px !important;
+  line-height: 1.8 !important;
+  max-width: 55ch !important;
+  margin-top: 10px !important;
+  margin-bottom: 30px;
+  text-align: left;
+}
+
+/* Sizes selector container */
+.drop__sizes {
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+  margin-bottom: 35px;
+}
+
+/* Individual size buttons */
+.drop__size {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 4px !important; /* matches card corner proportions */
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  background: #141619 !important;
+  color: var(--text-muted) !important;
+  font-family: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  letter-spacing: 0.05em !important;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  display: grid;
+  place-items: center;
+}
+.drop__size:hover:not(.out) {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px);
+}
+.drop__size.active {
+  background: var(--accent-red) !important;
+  color: #ffffff !important;
+  border-color: var(--accent-red) !important;
+  box-shadow: 0 0 15px rgba(230, 28, 28, 0.45) !important;
+}
+.drop__size.out {
+  background: #0d0e10 !important;
+  border-color: rgba(255, 255, 255, 0.03) !important;
+  color: #3e3b39 !important;
+}
+
+/* Actions container */
+.drop__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+/* Add to Bag main button - Redesigned to matching pill shapes */
+.drop__actions .btn--primary {
+  background: var(--fg) !important;
+  color: var(--bg) !important;
+  border: 1px solid var(--fg) !important;
+  border-radius: 4px !important; /* matches neoclassical sharp look */
+  font-family: var(--serif), serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.15em !important;
+  padding: 16px 36px !important;
+  box-shadow: 0 10px 25px rgba(255, 255, 255, 0.12) !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+}
+.drop__actions .btn--primary svg {
+  stroke: #141619 !important;
+}
+.drop__actions .btn--primary:hover {
+  background: var(--accent-red) !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 25px rgba(230, 28, 28, 0.5) !important;
+  transform: translateY(-2px) !important;
+}
+.drop__actions .btn--primary:hover svg {
+  stroke: #ffffff !important;
+}
+
+/* Subtext shipping note */
+.drop__note {
+  font-family: var(--font-mono), monospace !important;
+  color: var(--text-muted) !important;
+  font-size: 10px !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase;
+  margin-left: 5px;
+}

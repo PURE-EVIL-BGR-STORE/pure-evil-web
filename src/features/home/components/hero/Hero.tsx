@@ -5,7 +5,6 @@ import { Link } from '@/i18n/routing'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEmberParticles } from '../../hooks/useEmberParticles'
 import { useSigilAnimation } from '../../hooks/useSigilAnimation'
-import { DemonicEyesSection } from './DemonicEyesSection'
 import { useMediaQuery } from '@/shared/hooks/useMediaQuery'
 import { MEDIA_QUERIES } from '@/shared/constants/breakpoints'
 import { Button } from '@/components/ui/button/button'
@@ -153,8 +152,21 @@ export function Hero(): React.ReactElement {
         <div className="hero__mobile-glow" aria-hidden="true" />
       )}
 
-      {/*Eyes Background Grid (z-[1] — behind everything)*/}
-      <DemonicEyesSection isMobile={isMobile} />
+      {/* Clean Red Sigil background halo */}
+      <div 
+        className="absolute inset-0 flex items-center justify-center pointer-events-none z-[1] w-full h-screen overflow-hidden"
+        style={{
+          background: 'radial-gradient(circle at center, rgba(197, 20, 27, 0.08) 0%, transparent 60%)'
+        }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/PURE_EVIL_LOGO.png"
+          alt="PURE EVIL Sigil"
+          className="w-full max-w-[450px] h-auto object-contain opacity-20 select-none filter drop-shadow-[0_0_35px_rgba(197,20,27,0.3)] animate-pulse"
+          style={{ animationDuration: '6s' }}
+        />
+      </div>
 
       {/* Foreground 20-Row Grid (z-10 — above backgrounds)*/}
       <div className="absolute inset-0 grid grid-rows-[repeat(20,minmax(0,1fr))] grid-cols-5 z-10 w-full h-screen pointer-events-none">

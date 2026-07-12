@@ -124,9 +124,9 @@ export const ProductStage = ({
                   setActiveIndex(index)
                 }
               }}
-              className={`relative overflow-hidden rounded-lg bg-panel border transition-shadow duration-500 pointer-events-auto ${isActive
-                ? 'border-red-900'
-                : 'border-line/50 hover:border-line'
+              className={`relative overflow-hidden rounded-none bg-panel border transition-all duration-500 pointer-events-auto ${isActive
+                ? 'border-red outline outline-double outline-[3px] outline-red/30 outline-offset-[-4px] shadow-[0_0_30px_rgba(197,20,27,0.15)]'
+                : 'border-line/50 hover:border-line hover:outline hover:outline-double hover:outline-[3px] hover:outline-red/10 hover:outline-offset-[-4px]'
                 }`}
             >
               {isActive && (

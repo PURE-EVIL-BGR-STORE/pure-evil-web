@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function ProfilePage(): React.ReactElement {
   return (
-    <main className="shop-page flex-grow">
+    <main className="flex-grow w-full relative pt-8 pb-24 mx-auto max-w-[1400px] px-5 md:px-10">
       <ProfileView />
     </main>
   )

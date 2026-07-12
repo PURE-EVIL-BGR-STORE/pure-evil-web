@@ -29,7 +29,7 @@ export function ProductCard({
       {/* Product Image Link */}
       <Link
         href={`/collection/${product.id}`}
-        className="block relative aspect-[3/4] w-full border border-fg/10 overflow-hidden bg-[#0a0a0a] shadow-[0_12px_40px_rgba(0,0,0,0.7)] transition-all duration-500 group-hover:border-red/25 group-hover:shadow-[0_0_30px_rgba(197,20,27,0.12)] mb-0 cursor-pointer"
+        className="block relative aspect-[3/4] w-full border border-fg/10 overflow-hidden bg-[#0a0a0a] shadow-[0_12px_40px_rgba(0,0,0,0.7)] transition-all duration-500 group-hover:border-red/30 group-hover:shadow-[0_0_30px_rgba(197,20,27,0.12)] group-hover:outline group-hover:outline-double group-hover:outline-[3px] group-hover:outline-red/20 group-hover:outline-offset-[-4px] mb-0 cursor-pointer"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -62,7 +62,7 @@ export function ProductCard({
       <div className="flex flex-col gap-3 mt-6">
         <div className="flex justify-between items-baseline">
           <Link href={`/collection/${product.id}`} className="hover:text-red transition-colors duration-300 cursor-pointer">
-            <h3 className="text-lg font-serif font-semibold tracking-wider text-fg uppercase group-hover:text-red transition-colors duration-300">
+            <h3 className="text-lg font-serif font-medium tracking-[0.16em] text-fg uppercase group-hover:text-red transition-colors duration-300">
               {product.name}
             </h3>
           </Link>
@@ -100,7 +100,7 @@ export function ProductCard({
         {/* Add to Bag CTA */}
         <button
           onClick={() => onAddToBag(product)}
-          className="w-full mt-6 py-3 bg-transparent text-fg border border-fg/20 hover:border-red/60 hover:bg-red/5 hover:text-white hover:shadow-[0_0_20px_rgba(197,20,27,0.15)] font-mono text-xs uppercase tracking-[0.25em] font-semibold transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer relative overflow-hidden"
+          className="w-full mt-6 py-3 bg-transparent text-fg border border-fg/20 hover:border-red/60 hover:bg-red/5 hover:text-white hover:shadow-[0_0_20px_rgba(197,20,27,0.15)] hover:outline hover:outline-double hover:outline-[3px] hover:outline-red/35 hover:outline-offset-[-4px] font-mono text-xs uppercase tracking-[0.25em] font-semibold transition-all duration-300 flex items-center justify-center gap-2 group cursor-pointer relative overflow-hidden"
         >
           <ShoppingBag size={11} className="transition-transform duration-300 group-hover:scale-110 group-hover:text-red" />
           <span>ADD TO BAG</span>

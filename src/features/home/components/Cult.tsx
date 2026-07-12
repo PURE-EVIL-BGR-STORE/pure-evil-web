@@ -37,7 +37,7 @@ export function Cult() {
   return (
     <section className="cult" id="cult" data-screen-label="newsletter">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="cult__sigil" src="/PURE_EVIL_LOGO_4.png" alt="" />
+      <img className="cult__sigil" src="/PURE_EVIL_LOGO_3.png" alt="" />
       <div className="cult__inner">
         <span className="eyebrow eyebrow--plain" data-reveal style={{ justifyContent: "center", width: "100%" }}>
           The Cult — Members Only

@@ -29,7 +29,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     try {
       const stored = localStorage.getItem(CART_STORAGE_KEY)
       if (stored) {
-        setCart(JSON.parse(stored))
+        const parsed = JSON.parse(stored)
+        setTimeout(() => {
+          setCart(parsed)
+        }, 0)
       }
     } catch (e) {
       console.error('Failed to load cart from localStorage', e)
@@ -60,7 +63,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       (item) => item.product.id === product.id && item.selectedSize === size
     )
 
-    let newItems = [...cart.items]
+    const newItems = [...cart.items]
 
     if (existingIndex > -1) {
       newItems[existingIndex] = {

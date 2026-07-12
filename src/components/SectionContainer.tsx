@@ -13,7 +13,7 @@ export function SectionContainer({
 }: SectionContainerProps): React.ReactElement {
   return (
     <div
-      className={`${fluid ? 'w-full' : 'section-container'} ${className}`}
+      className={`${fluid ? 'w-full' : 'mx-auto max-w-[1400px] px-5 md:px-10 w-full'} ${className}`}
       {...props}
     >
       {children}

@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState } from 'react'
-import { toast } from 'sonner'
 import { Link } from '@/i18n/routing'
 import { PRODUCTS, Product } from '@/shared/constants/products'
 import { ProductCard } from '@/features/products/components/ProductCard'
@@ -58,7 +57,7 @@ export function CollectionView(): React.ReactElement {
   }
 
   return (
-    <main className="flex-grow shop-page w-full relative">
+    <main className="flex-grow w-full relative pt-8 pb-24">
       {/* Background Decorative Glow and Grid */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_-10%,rgba(197,20,27,0.05),transparent_60%)] pointer-events-none z-0" />
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.005)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.005)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none z-0" />
@@ -66,11 +65,11 @@ export function CollectionView(): React.ReactElement {
       {/* Safe container centered using SectionContainer */}
       <SectionContainer className="relative z-10">
         {/* Header Section */}
-        <div className="mb-16 border-b border-fg/10 pb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+        <div className="mb-8 border-b border-fg/10 pb-5 flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
           <div>
             <div className="flex items-center gap-2 text-faint font-mono text-xs uppercase tracking-[0.3em] mb-6">
               <Link href="/" className="hover:text-red transition-colors duration-300">HOME</Link>
-              <span className="text-faint/30">//</span>
+              <span className="text-faint/30">{'//'}</span>
               <span className="text-muted">COLLECTION</span>
             </div>
             <h1 className="text-4xl lg:text-5xl font-serif font-bold tracking-[0.15em] text-fg uppercase">
@@ -87,11 +86,11 @@ export function CollectionView(): React.ReactElement {
         </div>
 
         {/* Sidebar + Product Grid Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-16 pt-4 md:pt-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-16 pt-0">
           {/* Main Grid Area (Left 3 columns on desktop) */}
           <div className="lg:col-span-3 order-1 lg:order-none">
             {/* Search Bar */}
-            <div className="mb-12">
+            <div className="mb-6">
               <SearchInput
                 value={searchQuery}
                 onChange={setSearchQuery}

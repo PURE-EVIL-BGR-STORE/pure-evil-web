@@ -2,7 +2,7 @@ export function Manifesto() {
   return (
     <section className="section manifesto" id="manifesto" data-screen-label="manifesto">
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="manifesto__sigil" src="/PURE_EVIL_LOGO_4.png" alt="" data-drift="0.04" />
+      <img className="manifesto__sigil" src="/PURE_EVIL_LOGO_3.png" alt="" data-drift="0.04" />
       <div className="manifesto__grid">
         <div className="manifesto__label" data-reveal>
           <span>Manifesto</span>
